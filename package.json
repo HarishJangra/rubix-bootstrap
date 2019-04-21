@@ -1,0 +1,86 @@
+{
+  "private": true,
+  "name": "@sketchpixy/rubix",
+  "version": "2.9.4",
+  "description": "Rubix Bootstrap",
+  "homepage": "https://rubix-docs.sketchpixy.com/",
+  "author": "Sketchpixy <support@sketchpixy.com>",
+  "contributors": [
+    "Sketchpixy <support@sketchpixy.com>"
+  ],
+  "keywords": [],
+  "main": "lib/index.js",
+  "babel": {
+    "presets": [
+      "es2015-rollup",
+      "react",
+      "stage-0"
+    ],
+    "plugins": [
+      "transform-decorators-legacy",
+      "transform-runtime"
+    ]
+  },
+  "dependencies": {
+    "@sketchpixy/isomorphic-relay-router": "^0.8.5",
+    "@sketchpixy/react-router-relay": "^0.13.4",
+    "@sketchpixy/react-router-scroll": "^0.3.2",
+    "@sketchpixy/redux-fetch-data": "^0.1.3",
+    "axios": "^0.13.1",
+    "babel-relay-plugin": "^0.9.1",
+    "classnames": "^2.2.5",
+    "es6-promise": "^3.2.1",
+    "express-graphql": "^0.5.3",
+    "graphql": "^0.6.0",
+    "graphql-relay": "^0.4.2",
+    "immutable": "^3.8.1",
+    "isomorphic-relay": "^0.7.1",
+    "lodash-compat": "^3.10.2",
+    "prop-types": "^15.7.2",
+    "pubsub-js": "^1.5.3",
+    "query-string": "^4.2.2",
+    "react": "^16.8.6",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "^3.0.0-beta.2",
+    "react-motion": "^0.4.4",
+    "react-redux": "^4.4.5",
+    "react-relay": "^0.9.1",
+    "react-router": "^3.0.0-alpha.3",
+    "react-router-redux": "^4.0.5",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
+    "request-frame": "^1.4.1",
+    "watch": "^0.19.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.10.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2015-rollup": "^1.1.1",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.9.0",
+    "babel-runtime": "^6.9.2",
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
+    "del": "^2.2.1",
+    "istanbul": "^1.0.0-alpha.2",
+    "mocha": "^3.0.2",
+    "ncp": "^2.0.0",
+    "rollup": "^0.32.4",
+    "rollup-plugin-babel": "^2.6.1",
+    "sinon": "^2.0.0-pre",
+    "watch": "^0.19.2"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel-register",
+    "test:watch": "mocha --compilers js:babel-register --reporter min --watch",
+    "test:cover": "babel-node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "build": "node tools/build",
+    "publish": "npm run build -s && cd dist && npm publish"
+  }
+}
