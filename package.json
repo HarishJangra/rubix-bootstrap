@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@sketchpixy/rubix",
-  "version": "2.9.4",
+  "version": "3.1.0",
   "description": "Rubix Bootstrap",
   "homepage": "https://rubix-docs.sketchpixy.com/",
   "author": "Sketchpixy <support@sketchpixy.com>",
