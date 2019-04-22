@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { cloneElement, PropTypes } from 'react';
+import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types'
 import { bsClass as setBsClass, bsStyles, getClassSet, prefix, splitBsProps }
   from 'react-bootstrap/lib/utils/bootstrapUtils';

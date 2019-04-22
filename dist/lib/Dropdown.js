@@ -56,6 +56,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
@@ -113,14 +117,14 @@ var propTypes = {
   /**
    * The menu will open above the dropdown button, instead of below it.
    */
-  dropup: PropTypes.bool,
+  dropup: _propTypes2.default.bool,
 
   /**
    * An html id attribute, necessary for assistive technologies, such as screen readers.
    * @type {string|number}
    * @required
    */
-  id: (0, _isRequiredForA11y2.default)(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  id: (0, _isRequiredForA11y2.default)(_propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])),
 
   componentClass: _elementType2.default,
 
@@ -133,24 +137,24 @@ var propTypes = {
   /**
    * Whether or not component is disabled.
    */
-  disabled: PropTypes.bool,
+  disabled: _propTypes2.default.bool,
 
   /**
    * Align the menu to the right side of the Dropdown toggle
    */
-  pullRight: PropTypes.bool,
+  pullRight: _propTypes2.default.bool,
 
   /**
    * Whether or not the Dropdown is visible.
    *
    * @controllable onToggle
    */
-  open: PropTypes.bool,
+  open: _propTypes2.default.bool,
 
   /**
    * A callback fired when the Dropdown closes.
    */
-  onClose: PropTypes.func,
+  onClose: _propTypes2.default.func,
 
   /**
    * A callback fired when the Dropdown wishes to change visibility. Called with the requested
@@ -161,7 +165,7 @@ var propTypes = {
    * ```
    * @controllable open
    */
-  onToggle: PropTypes.func,
+  onToggle: _propTypes2.default.func,
 
   /**
    * A callback fired when a menu item is selected.
@@ -170,13 +174,13 @@ var propTypes = {
    * (eventKey: any, event: Object) => any
    * ```
    */
-  onSelect: PropTypes.func,
+  onSelect: _propTypes2.default.func,
 
   /**
    * If `'menuitem'`, causes the dropdown to behave like a menu item rather than
    * a menu button.
    */
-  role: PropTypes.string
+  role: _propTypes2.default.string
 };
 
 var defaultProps = {
