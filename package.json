@@ -1,12 +1,12 @@
 {
   "private": true,
-  "name": "@sketchpixy/rubix",
+  "name": "@harish/bootstrap",
   "version": "3.1.0",
-  "description": "Rubix Bootstrap",
-  "homepage": "https://rubix-docs.sketchpixy.com/",
-  "author": "Sketchpixy <support@sketchpixy.com>",
+  "description": "Harish Bootstrap",
+  "homepage": "https://schoollog.in/",
+  "author": "Harish <harish0212@yahoo.com>",
   "contributors": [
-    "Sketchpixy <support@sketchpixy.com>"
+    "Harish Jangra <harish0212@yahoo.com>"
   ],
   "keywords": [],
   "main": "lib/index.js",
