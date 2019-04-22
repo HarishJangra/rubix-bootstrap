@@ -22,6 +22,8 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var createReactClass = require('create-react-class');
+
 /**
  * @copyright https://github.com/f/loremjs
  * @licence https://github.com/f/loremjs/blob/master/LICENSE
@@ -130,7 +132,7 @@ var Lorem;
     };
 })();
 
-exports.default = _react2.default.createClass({
+exports.default = createReactClass({
     displayName: 'LoremIpsum',
     propTypes: {
         type: _propTypes2.default.string,

@@ -1,5 +1,6 @@
-import React from 'react';    import PropTypes from 'prop-types'
+import React from 'react'; import PropTypes from 'prop-types'
 import Dispatcher from './Dispatcher';
+var createReactClass = require('create-react-class');
 
 import isBrowser from './isBrowser';
 
@@ -7,7 +8,7 @@ var win = null;
 if (!isBrowser()) {
   win = {
     L20n: {
-      getContext: function() {},
+      getContext: function () { },
     },
   };
 } else {
@@ -15,7 +16,7 @@ if (!isBrowser()) {
 
   if (!win.hasOwnProperty('L20n')) {
     win.L20n = {
-      getContext: function() {},
+      getContext: function () { },
     };
   }
 }
@@ -25,68 +26,68 @@ var ctx = win.L20n.getContext();
 var Entities = {
   ready: false,
   entities: {},
-  registerEntity: function(entity) {
-    if(Entities.hasOwnProperty(entity)) {
-      if(!Entities.ready) return;
-      Dispatcher.publish('ctx:'+entity);
+  registerEntity: function (entity) {
+    if (Entities.hasOwnProperty(entity)) {
+      if (!Entities.ready) return;
+      Dispatcher.publish('ctx:' + entity);
       return;
     }
-    ctx.localize([entity], function(l) {
-      Dispatcher.publish('ctx:'+entity);
+    ctx.localize([entity], function (l) {
+      Dispatcher.publish('ctx:' + entity);
     });
     Entities[entity] = 1;
   }
 };
 
-var initializeLocales = function(locales, rpath) {
+var initializeLocales = function (locales, rpath) {
   rpath = rpath || '';
-  ctx.ready(function() {
+  ctx.ready(function () {
     Entities.ready = true;
-    for(var i in Entities.entities) {
+    for (var i in Entities.entities) {
       Entities.registerEntity(Entities.entities[i]);
     }
     Dispatcher.publish('ctx:ready');
   });
-  ctx.linkResource(function(locale) {
+  ctx.linkResource(function (locale) {
     return rpath + '/locales/' + locale + '/strings.l20n';
   });
   ctx.registerLocales(locales.default, locales.locales);
   ctx.requestLocales(locales.default);
 };
 
-var Entity = React.createClass({
+var Entity = createReactClass({
   propTypes: {
     data: PropTypes.object,
     entity: PropTypes.string,
     dangerouslySetInnerHTML: PropTypes.bool,
   },
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       componentClass: 'span',
       componentAttribute: ''
     };
   },
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       entity: this.props.defaultValue || ''
     };
   },
-  handler: function() {
+  handler: function () {
     this.setState({
       entity: ctx.getSync(this.props.entity, this.props.data)
     });
   },
-  componentDidMount: function() {
-    this.subscription = Dispatcher.subscribe('ctx:'+this.props.entity, this.handler);
+  componentDidMount: function () {
+    this.subscription = Dispatcher.subscribe('ctx:' + this.props.entity, this.handler);
     Entities.registerEntity(this.props.entity);
-    if(Entities.ready) {
+    if (Entities.ready) {
       this.handler();
     }
   },
-  componentWillUnmount: function() {
+  componentWillUnmount: function () {
     Dispatcher.unsubscribe(this.subscription);
   },
-  render: function() {
+  render: function () {
     var ComponentClass = this.props.componentClass;
     var componentAttribute = this.props.componentAttribute;
 
@@ -103,7 +104,7 @@ var Entity = React.createClass({
     delete props.componentAttribute;
     delete props.dangerouslySetInnerHTML;
 
-    if(ComponentClass && componentAttribute.length) {
+    if (ComponentClass && componentAttribute.length) {
       props[componentAttribute] = this.state.entity;
 
       return (
@@ -111,14 +112,14 @@ var Entity = React.createClass({
       );
     }
 
-    if(ComponentClass === 'input') {
+    if (ComponentClass === 'input') {
       return (
         <ComponentClass {...props} value={this.state.entity} />
       );
     }
-    if(this.props.dangerouslySetInnerHTML) {
+    if (this.props.dangerouslySetInnerHTML) {
       return (
-        <ComponentClass {...props} dangerouslySetInnerHTML={{__html: this.state.entity}} />
+        <ComponentClass {...props} dangerouslySetInnerHTML={{ __html: this.state.entity }} />
       );
     }
     return (
@@ -129,16 +130,16 @@ var Entity = React.createClass({
 
 module.exports = {
   ctx: ctx,
-  initializeLocales: function(locales, rpath) {
+  initializeLocales: function (locales, rpath) {
     initializeLocales(locales, rpath);
   },
-  ready: function() {
-    if(Entities.ready) {
+  ready: function () {
+    if (Entities.ready) {
       Dispatcher.publish('ctx:ready');
       return;
     }
   },
-  changeLocale: function(locale) {
+  changeLocale: function (locale) {
     ctx.requestLocales(locale);
   },
   Entity: Entity

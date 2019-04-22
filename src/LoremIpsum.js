@@ -1,15 +1,17 @@
-import React from 'react';    import PropTypes from 'prop-types'
+import React from 'react'; import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom';
+var createReactClass = require('create-react-class');
+
 /**
  * @copyright https://github.com/f/loremjs
  * @licence https://github.com/f/loremjs/blob/master/LICENSE
  */
 
 var Lorem;
-(function() {
+(function () {
 
     //Create a class named Lorem and constructor
-    Lorem = function() {
+    Lorem = function () {
         //Default values.
         this.type = null;
         this.query = null;
@@ -41,7 +43,7 @@ var Lorem;
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };
     //text creator method with parameters: how many, what
-    Lorem.prototype.createText = function(count, type) {
+    Lorem.prototype.createText = function (count, type) {
         switch (type) {
             //paragraphs are loads of sentences.
             case Lorem.TYPE.PARAGRAPH:
@@ -49,7 +51,7 @@ var Lorem;
                 for (var i = 0; i < count; i++) {
                     var paragraphLength = this.randomInt(10, 20);
                     var paragraph = this.createText(paragraphLength, Lorem.TYPE.SENTENCE);
-                    paragraphs.push('<p>'+paragraph+'</p>');
+                    paragraphs.push('<p>' + paragraph + '</p>');
                 }
                 return paragraphs.join('\n');
                 break;
@@ -74,15 +76,15 @@ var Lorem;
                 break;
         }
     };
-    Lorem.prototype.createLorem = function(element) {
+    Lorem.prototype.createLorem = function (element) {
 
         var lorem = new Array;
         var count;
 
-        if (/\d+-\d+[psw]/.test(this.query)){
-            var range = this.query.replace(/[a-z]/,'').split("-");
+        if (/\d+-\d+[psw]/.test(this.query)) {
+            var range = this.query.replace(/[a-z]/, '').split("-");
             count = Math.floor(Math.random() * parseInt(range[1])) + parseInt(range[0]);
-        }else{
+        } else {
             count = parseInt(this.query);
         }
 
@@ -117,7 +119,7 @@ var Lorem;
                     path += '/' + element.getAttribute('height');
 
                 path += '/' + options.join(' ').replace(/(^\s+|\s+$)/, '');
-                element.src = 'http://lorempixel.com'+path.replace(/\/\//, '/');
+                element.src = 'http://lorempixel.com' + path.replace(/\/\//, '/');
             }
         }
 
@@ -126,47 +128,47 @@ var Lorem;
     };
 })();
 
-export default React.createClass({
-  displayName: 'LoremIpsum',
-  propTypes: {
-    type: PropTypes.string,
-    query: PropTypes.string.isRequired
-  },
-  getDefaultProps: function() {
-    return {
-      type: 'text'
-    };
-  },
-  componentDidMount: function() {
-    var lorem = new Lorem();
+export default createReactClass({
+    displayName: 'LoremIpsum',
+    propTypes: {
+        type: PropTypes.string,
+        query: PropTypes.string.isRequired
+    },
+    getDefaultProps: function () {
+        return {
+            type: 'text'
+        };
+    },
+    componentDidMount: function () {
+        var lorem = new Lorem();
 
-    switch(this.props.type) {
-      case 'img':
-        lorem.type = Lorem.IMAGE;
-      break;
-      case 'text':
-      default:
-        lorem.type = Lorem.TEXT;
-      break;
+        switch (this.props.type) {
+            case 'img':
+                lorem.type = Lorem.IMAGE;
+                break;
+            case 'text':
+            default:
+                lorem.type = Lorem.TEXT;
+                break;
+        }
+
+        lorem.query = this.props.query;
+        var l = lorem.createLorem(this._node);
+    },
+    render: function () {
+        var props = {
+            type: null,
+            query: null,
+            ...this.props
+        };
+
+        delete props.type;
+        delete props.query;
+
+        var ComponentClass;
+        if (this.props.type === 'text')
+            return <span {...props} ref={(c) => this._node = c} />
+        else
+            return <img {...props} ref={(c) => this._node = c} />
     }
-
-    lorem.query = this.props.query;
-    var l = lorem.createLorem(this._node);
-  },
-  render: function() {
-    var props = {
-      type: null,
-      query: null,
-      ...this.props
-    };
-
-    delete props.type;
-    delete props.query;
-
-    var ComponentClass;
-    if(this.props.type === 'text')
-      return <span {...props} ref={(c) => this._node = c} />
-    else
-      return <img {...props} ref={(c) => this._node = c} />
-  }
 });
