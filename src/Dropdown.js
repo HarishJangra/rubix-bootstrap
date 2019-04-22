@@ -3,6 +3,8 @@ import activeElement from 'dom-helpers/activeElement';
 import contains from 'dom-helpers/query/contains';
 import keycode from 'keycode';
 import React, { cloneElement } from 'react';
+import PropTypes from 'prop-types'
+
 import ReactDOM from 'react-dom';
 import all from 'react-prop-types/lib/all';
 import elementType from 'react-prop-types/lib/elementType';

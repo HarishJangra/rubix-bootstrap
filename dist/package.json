@@ -1,13 +1,16 @@
 {
-  "name": "@sketchpixy/rubix",
-  "version": "2.9.4",
-  "description": "Rubix Bootstrap",
-  "homepage": "https://rubix-docs.sketchpixy.com/",
-  "author": "Sketchpixy <support@sketchpixy.com>",
+  "name": "harish_bootstrap",
+  "version": "3.1.2",
+  "description": "Harish Bootstrap",
+  "homepage": "https://schoollog.in/",
+  "author": "Harish <harish0212@yahoo.com>",
   "contributors": [
-    "Sketchpixy <support@sketchpixy.com>"
+    "Harish Jangra <harish0212@yahoo.com>"
   ],
-  "keywords": [],
+  "keywords": [
+    "bootstrap"
+  ],
+  "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
     "@sketchpixy/isomorphic-relay-router": "^0.8.5",

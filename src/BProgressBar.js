@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { cloneElement, PropTypes } from 'react';
-
+import PropTypes from 'prop-types'
 import { bsClass as setBsClass, bsStyles, getClassSet, prefix, splitBsProps }
   from 'react-bootstrap/lib/utils/bootstrapUtils';
 import { State } from 'react-bootstrap/lib/utils/StyleConfig';
@@ -128,7 +128,7 @@ class ProgressBar extends React.Component {
         {children ?
           ValidComponentChildren.map(children, child => (
             cloneElement(child, { isChild: true }
-          ))) :
+            ))) :
           this.renderProgressBar({
             min, now, max, label, srOnly, striped, active, bsClass, bsStyle, color,
           })
