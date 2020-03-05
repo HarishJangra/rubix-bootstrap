@@ -1,3 +1,3 @@
-import Label from 'react-bootstrap/lib/Label';
+import Label from "react-bootstrap/lib/Label";
 
 export default Label;

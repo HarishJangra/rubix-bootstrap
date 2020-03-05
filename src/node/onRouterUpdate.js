@@ -1,6 +1,6 @@
-import isBrowser from '../isBrowser';
-import Dispatcher from '../Dispatcher';
-import isTouchDevice from '../isTouchDevice';
+import isBrowser from "../isBrowser";
+import Dispatcher from "../Dispatcher";
+import isTouchDevice from "../isTouchDevice";
 
 var isSetup = false;
 export default function onRouterUpdate() {
@@ -18,7 +18,7 @@ export default function onRouterUpdate() {
 
     if (isTouchDevice()) {
       // close sidebar on router update
-      Dispatcher.publish('sidebar', false);
+      Dispatcher.publish("sidebar", false);
     }
   }
 }

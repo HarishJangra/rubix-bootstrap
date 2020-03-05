@@ -1,15 +1,22 @@
-import React from 'react';    import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom';
-import ReactDOMServer from 'react-dom/server';
-import { Router, match, RouterContext, applyRouterMiddleware,
-         hashHistory, browserHistory } from 'react-router';
-import { AppContainer } from 'react-hot-loader';
-import useScroll from '@sketchpixy/react-router-scroll';
+import React from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import ReactDOMServer from "react-dom/server";
+import {
+  Router,
+  match,
+  RouterContext,
+  applyRouterMiddleware,
+  hashHistory,
+  browserHistory
+} from "react-router";
+import { AppContainer } from "react-hot-loader";
+import useScroll from "react-router-scroll";
 
-import onRouterSetup from '../node/onRouterSetup';
-import checkScroll from '../node/checkScroll';
+import onRouterSetup from "../node/onRouterSetup";
+import checkScroll from "../node/checkScroll";
 
-import isBrowser from '../isBrowser';
+import isBrowser from "../isBrowser";
 
 if (isBrowser()) {
   onRouterSetup();
@@ -21,10 +28,12 @@ class WrapperComponent extends React.Component {
   }
 }
 
-var isRouterSet = false, history, routes;
+var isRouterSet = false,
+  history,
+  routes;
 
 function getPreloadedDataElement() {
-  return document.getElementById('preloadedData');
+  return document.getElementById("preloadedData");
 }
 
 function getData() {
@@ -54,7 +63,7 @@ class FetchData extends React.Component {
     this.originalData = props.data || getData() || '""';
 
     this.state = {
-      data: props.data || getData() || '""',
+      data: props.data || getData() || '""'
     };
   }
 
@@ -62,10 +71,10 @@ class FetchData extends React.Component {
     if (isBrowser()) {
       let { component } = props;
       if (component.fetchData) {
-        component.fetchData(props).then((result) => {
+        component.fetchData(props).then(result => {
           this.setState({
             data: result.data,
-            errors: result.errors,
+            errors: result.errors
           });
         });
       }
@@ -107,44 +116,58 @@ export default function render(Component, onRender) {
 
     if (!isRouterSet) {
       isRouterSet = true;
-      history = (Modernizr.history
-                        ? browserHistory
-                        : hashHistory);
+      history = Modernizr.history ? browserHistory : hashHistory;
       routes = (
-        <Router history={history}
-                createElement={onCreateElement}
-                render={applyRouterMiddleware(useScroll(checkScroll))}>
+        <Router
+          history={history}
+          createElement={onCreateElement}
+          render={applyRouterMiddleware(useScroll(checkScroll))}
+        >
           {Component}
         </Router>
       );
     }
 
-    ReactDOM.render(<AppContainer><WrapperComponent>{routes}</WrapperComponent></AppContainer>,
-      document.getElementById('app-container'),
-      onRender);
+    ReactDOM.render(
+      <AppContainer>
+        <WrapperComponent>{routes}</WrapperComponent>
+      </AppContainer>,
+      document.getElementById("app-container"),
+      onRender
+    );
   }
 }
 
 class StaticComponentInternal extends React.Component {
   render() {
-    let Handler = null, props = this.props, data = props.data || '""';
+    let Handler = null,
+      props = this.props,
+      data = props.data || '""';
 
-    let location = (this.props.path +
-                        (this.props.query ? ('?' + this.props.query)
-                                          : ''));
+    let location =
+      this.props.path + (this.props.query ? "?" + this.props.query : "");
 
-    match({ routes, location: location}, (error, redirectLocation, renderProps) => {
-      Handler = (
-        <AppContainer>
-          <RouterContext {...renderProps}
-                          createElement={(Component, routerProps) => {
-                            return <FetchData component={Component}
-                                              routerProps={routerProps}
-                                              data={data} />;
-                          }} />
-        </AppContainer>
-      );
-    });
+    match(
+      { routes, location: location },
+      (error, redirectLocation, renderProps) => {
+        Handler = (
+          <AppContainer>
+            <RouterContext
+              {...renderProps}
+              createElement={(Component, routerProps) => {
+                return (
+                  <FetchData
+                    component={Component}
+                    routerProps={routerProps}
+                    data={data}
+                  />
+                );
+              }}
+            />
+          </AppContainer>
+        );
+      }
+    );
 
     return Handler;
   }
@@ -156,13 +179,15 @@ export function setRoutes(_routes) {
 
 export function getCsrfToken() {
   if (!isBrowser()) return "";
-  let el = document.getElementById('csrfToken') || document.querySelectorAll('[name=csrf-token]')[0];
+  let el =
+    document.getElementById("csrfToken") ||
+    document.querySelectorAll("[name=csrf-token]")[0];
 
   if (el) {
     if (el.textContent.length) {
       return el.textContent.trim();
     } else {
-      return el.getAttribute('content');
+      return el.getAttribute("content");
     }
   }
 }
