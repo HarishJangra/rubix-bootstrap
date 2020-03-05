@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "private": true,
   "name": "@sketchpixy/rubix",
   "version": "3.1.0",
@@ -8,16 +7,6 @@
   "author": "Harish <harish0212@yahoo.com>",
   "contributors": [
     "Schoollog <info@schoollog.in>"
-=======
-  "private": false,
-  "name": "harish_bootstrap",
-  "version": "3.1.5",
-  "description": "Harish Bootstrap",
-  "homepage": "https://schoollog.in/",
-  "author": "Harish <harish0212@yahoo.com>",
-  "contributors": [
-    "Harish Jangra <harish0212@yahoo.com>"
->>>>>>> 38e9740321c045bc802989e1ee18344f0def0022
   ],
   "keywords": [
     "bootstrap"
