@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Label = require('react-bootstrap/lib/Label');
+var _Label = require("react-bootstrap/lib/Label");
 
 var _Label2 = _interopRequireDefault(_Label);
 
