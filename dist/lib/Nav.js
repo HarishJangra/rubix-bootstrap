@@ -52,6 +52,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
@@ -88,19 +92,19 @@ var propTypes = {
    * Marks the NavItem with a matching `eventKey` as active. Has a
    * higher precedence over `activeHref`.
    */
-  activeKey: PropTypes.any,
+  activeKey: _propTypes2.default.any,
 
   /**
    * Marks the child NavItem with a matching `href` prop as active.
    */
-  activeHref: PropTypes.string,
+  activeHref: _propTypes2.default.string,
 
   /**
    * NavItems are be positioned vertically.
    */
-  stacked: PropTypes.bool,
+  stacked: _propTypes2.default.bool,
 
-  justified: (0, _all2.default)(PropTypes.bool, function (_ref) {
+  justified: (0, _all2.default)(_propTypes2.default.bool, function (_ref) {
     var justified = _ref.justified,
         navbar = _ref.navbar;
     return justified && navbar ? Error('justified navbar `Nav`s are not supported') : null;
@@ -116,7 +120,7 @@ var propTypes = {
    * )
    * ```
    */
-  onSelect: PropTypes.func,
+  onSelect: _propTypes2.default.func,
 
   /**
    * ARIA role for the Nav, in the context of a TabContainer, the default will
@@ -126,25 +130,25 @@ var propTypes = {
    * the ARIA authoring practices for tabs:
    * https://www.w3.org/TR/2013/WD-wai-aria-practices-20130307/#tabpanel
    */
-  role: PropTypes.string,
+  role: _propTypes2.default.string,
 
   /**
    * Apply styling an alignment for use in a Navbar. This prop will be set
    * automatically when the Nav is used inside a Navbar.
    */
-  navbar: PropTypes.bool,
+  navbar: _propTypes2.default.bool,
 
   /**
    * Float the Nav to the right. When `navbar` is `true` the appropriate
    * contextual classes are added as well.
    */
-  pullRight: PropTypes.bool,
+  pullRight: _propTypes2.default.bool,
 
   /**
    * Float the Nav to the left. When `navbar` is `true` the appropriate
    * contextual classes are added as well.
    */
-  pullLeft: PropTypes.bool
+  pullLeft: _propTypes2.default.bool
 };
 
 var defaultProps = {
@@ -155,15 +159,15 @@ var defaultProps = {
 };
 
 var contextTypes = {
-  $bs_navbar: PropTypes.shape({
-    bsClass: PropTypes.string
+  $bs_navbar: _propTypes2.default.shape({
+    bsClass: _propTypes2.default.string
   }),
 
-  $bs_tabContainer: PropTypes.shape({
-    activeKey: PropTypes.any,
-    onSelect: PropTypes.func.isRequired,
-    getTabId: PropTypes.func.isRequired,
-    getPaneId: PropTypes.func.isRequired
+  $bs_tabContainer: _propTypes2.default.shape({
+    activeKey: _propTypes2.default.any,
+    onSelect: _propTypes2.default.func.isRequired,
+    getTabId: _propTypes2.default.func.isRequired,
+    getPaneId: _propTypes2.default.func.isRequired
   })
 };
 

@@ -7,13 +7,17 @@
   "contributors": [
     "Schoollog <info@schoollog.in>"
   ],
-  "keywords": [],
+  "keywords": [
+    "bootstrap"
+  ],
+  "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
     "react-router-scroll": "^0.4.4",
     "redux-fetch-data": "^0.1.4",
     "axios": "^0.13.1",
     "classnames": "^2.2.5",
+    "create-react-class": "^15.6.3",
     "es6-promise": "^3.2.1",
     "lodash-compat": "^3.10.2",
     "prop-types": "^15.7.2",

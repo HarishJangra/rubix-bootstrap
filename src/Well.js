@@ -1,4 +1,4 @@
-import React from 'react';    import PropTypes from 'prop-types'
+import React from 'react'; import PropTypes from 'prop-types'
 import classNames from 'classnames';
 import BWell from 'react-bootstrap/lib/Well';
 
@@ -10,7 +10,7 @@ export default class Well extends React.Component {
   };
 
   render() {
-    let props = {...this.props};
+    let props = { ...this.props };
 
     if (props.hasOwnProperty('sm')) {
       props.bsSize = 'sm';

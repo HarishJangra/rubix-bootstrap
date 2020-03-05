@@ -52,6 +52,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _bootstrapUtils = require('react-bootstrap/lib/utils/bootstrapUtils');
 
 var _StyleConfig = require('react-bootstrap/lib/utils/StyleConfig');
@@ -93,19 +97,19 @@ function onlyProgressBar(props, propName, componentName) {
 }
 
 var propTypes = {
-  min: _react.PropTypes.number,
-  now: _react.PropTypes.number,
-  max: _react.PropTypes.number,
-  label: _react.PropTypes.node,
-  srOnly: _react.PropTypes.bool,
-  striped: _react.PropTypes.bool,
-  active: _react.PropTypes.bool,
+  min: _propTypes2.default.number,
+  now: _propTypes2.default.number,
+  max: _propTypes2.default.number,
+  label: _propTypes2.default.node,
+  srOnly: _propTypes2.default.bool,
+  striped: _propTypes2.default.bool,
+  active: _propTypes2.default.bool,
   children: onlyProgressBar,
 
   /**
    * @private
    */
-  isChild: _react.PropTypes.bool
+  isChild: _propTypes2.default.bool
 };
 
 var defaultProps = {

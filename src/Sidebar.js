@@ -1,6 +1,6 @@
-import React from 'react';    import PropTypes from 'prop-types'
+import React from 'react'; import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom';
-import { Link, withRouter} from 'react-router';
+import { Link, withRouter } from 'react-router';
 import { matchPattern } from 'react-router/lib/PatternUtils';
 import classNames from 'classnames';
 
@@ -40,14 +40,14 @@ function matchRoute(pattern, pathname, params) {
       return false;
     }
     remainingPathname = matched.remainingPathname
-    paramNames = [ ...paramNames, ...matched.paramNames ]
-    paramValues = [ ...paramValues, ...matched.paramValues ]
+    paramNames = [...paramNames, ...matched.paramNames]
+    paramValues = [...paramValues, ...matched.paramValues]
 
     if (remainingPathname === '') {
       // We have an exact match on the route. Just check that all the params
       // match.
       // FIXME: This doesn't work on repeated params.
-      return(paramNames.every((paramName, index) => (
+      return (paramNames.every((paramName, index) => (
         (String(paramValues[index]) === String(params[paramName]))
       )));
     }
@@ -58,7 +58,7 @@ function matchRoute(pattern, pathname, params) {
 
 function matchRoutes(routes, pathname, params) {
   var matched = false, patternMatched = '';
-  for(var i = 0; i < routes.length; i++) {
+  for (var i = 0; i < routes.length; i++) {
     if (matchRoute(routes[i], pathname, params)) {
       if (matched == true) {
         if (matchRoute(patternMatched, routes[i], params)) {
@@ -82,42 +82,46 @@ function getOpenState() {
   return (!isTouchDevice()) ? (localStorage.getItem('sidebar-open-state') === 'true' ? true : false) : false;
 }
 
-const MainContainer = React.createClass({
-  displayName: 'MainContainer',
+class MainContainer extends React.Component {
   getInitialState() {
     return {
       open: true,
       forceClose: false
     };
-  },
+  }
+  constructor(props) {
+    super(props)
+    this.state = this.getInitialState()
+  }
+
   isOpen(open) {
     return this.state.open === open;
-  },
+  }
   closeSidebar(forceClose = false) {
     this.setState({
       open: false,
       forceClose: forceClose
     });
     localStorage.setItem('sidebar-open-state', false);
-  },
+  }
   openSidebar(forceClose = false) {
     this.setState({
       open: true,
       forceClose: forceClose
     });
     localStorage.setItem('sidebar-open-state', true);
-  },
+  }
   toggleSidebar() {
     if (this.state.forceClose) {
       this.openSidebar(false);
     } else {
       this.closeSidebar(true);
     }
-  },
+  }
   sidebarStateChangeCallback(open) {
     var openState = getOpenState();
-    if(this.isOpen(open)) return;
-    if(open !== undefined) {
+    if (this.isOpen(open)) return;
+    if (open !== undefined) {
       openState = open;
     } else {
       openState = !this.state.open;
@@ -126,28 +130,28 @@ const MainContainer = React.createClass({
       open: openState // toggle sidebar
     });
     localStorage.setItem('sidebar-open-state', openState);
-  },
+  }
   enablePath(props) {
     if (props) {
       enableStateForPathname(props.location.pathname, props.params);
     }
     Dispatcher.publish('sidebar:activate');
-  },
+  }
   componentWillReceiveProps(nextProps) {
     setTimeout(() => {
       this.enablePath(nextProps);
     }, 50);
     // this.enablePath();
-  },
+  }
   componentWillUnmount() {
     Dispatcher.unsubscribe(this.handler);
-  },
+  }
   startSwipe(e) {
     if (e.changedTouches.length) {
       var touches = e.changedTouches[0];
       this.startX = touches.pageX;
     }
-  },
+  }
   swiping(e) {
     if (e.changedTouches.length) {
       var touches = e.changedTouches[0];
@@ -175,7 +179,7 @@ const MainContainer = React.createClass({
         }
       }
     }
-  },
+  }
   cancelSwipe(e) {
     this.startX = 0;
     var body = document.getElementById('body');
@@ -189,7 +193,7 @@ const MainContainer = React.createClass({
     this.setState({
       open: false
     });
-  },
+  }
   endSwipe(e) {
     if (e.changedTouches.length) {
       var touches = e.changedTouches[0];
@@ -218,12 +222,12 @@ const MainContainer = React.createClass({
         }
       }
     }
-  },
+  }
   componentWillUnmount() {
     Dispatcher.unsubscribe(this.sidebarStateChangeCallback);
     Dispatcher.unsubscribe(this.closeSidebar);
     Dispatcher.unsubscribe(this.toggleSidebar);
-  },
+  }
   componentDidMount() {
     this.handler = Dispatcher.subscribe('sidebar', this.sidebarStateChangeCallback);
     this.closeHandler = Dispatcher.subscribe('sidebar:closeSidebar', this.closeSidebar);
@@ -235,7 +239,7 @@ const MainContainer = React.createClass({
     });
 
     this.enablePath();
-  },
+  }
   render() {
     var classes = classNames({
       'container-open': this.state.open,
@@ -248,7 +252,8 @@ const MainContainer = React.createClass({
       </div>
     );
   }
-});
+
+}
 
 export default MainContainer;
 
@@ -278,7 +283,7 @@ export class Sidebar extends React.Component {
 
     while (child_node.parentNode) {
       if (child_node.parentNode === node) {
-        if(scrollTo > (window.innerHeight / 2)) {
+        if (scrollTo > (window.innerHeight / 2)) {
           node.scrollTop = (scrollTo - (window.innerHeight / 2) + 100);
         }
         break;
@@ -287,13 +292,13 @@ export class Sidebar extends React.Component {
       child_node = child_node.parentNode;
     }
 
-    if(!isTouchDevice()) {
+    if (!isTouchDevice()) {
       this.updateScrollbar();
     }
   }
 
   updateScrollbar() {
-    if(!isTouchDevice()) {
+    if (!isTouchDevice()) {
       if (isBrowser()) {
         if (window.Ps) {
           Ps.update(ReactDOM.findDOMNode(this.refs.sidebar));
@@ -321,7 +326,7 @@ export class Sidebar extends React.Component {
   }
 
   handleKeyChange(sidebar) {
-    var newLeft = ((this.props.sidebar*100) - (sidebar*100))+'%';
+    var newLeft = ((this.props.sidebar * 100) - (sidebar * 100)) + '%';
     this.setState({
       left: newLeft,
       visibility: 'visible'
@@ -339,11 +344,11 @@ export class Sidebar extends React.Component {
   componentDidMount() {
     this.initializeScrollbar();
 
-    this.reinitializeScrollbarHandler = Dispatcher.subscribe('sidebar:reinitialize', ::this.initializeScrollbar);
-    this.destroyScrollbarHandler = Dispatcher.subscribe('sidebar:destroy', ::this.destroyScrollbar)
-    this.repositionHandler = Dispatcher.subscribe('sidebar:reposition', ::this.repositionScrollbar);
-    this.keychangeHandler = Dispatcher.subscribe('sidebar:keychange', ::this.handleKeyChange);
-    this.updateHandler = Dispatcher.subscribe('sidebar:update', ::this.updateScrollbar);
+    this.reinitializeScrollbarHandler = Dispatcher.subscribe('sidebar:reinitialize', :: this.initializeScrollbar);
+    this.destroyScrollbarHandler = Dispatcher.subscribe('sidebar:destroy', :: this.destroyScrollbar)
+    this.repositionHandler = Dispatcher.subscribe('sidebar:reposition', :: this.repositionScrollbar);
+    this.keychangeHandler = Dispatcher.subscribe('sidebar:keychange', :: this.handleKeyChange);
+    this.updateHandler = Dispatcher.subscribe('sidebar:update', :: this.updateScrollbar);
 
     if (this.props.active) {
       Dispatcher.publish('sidebar:controlbtn', this.props);
@@ -364,8 +369,8 @@ export class Sidebar extends React.Component {
       },
       ...this.props,
       className: classNames('sidebar',
-                            'sidebar__main',
-                            this.props.className)
+        'sidebar__main',
+        this.props.className)
     };
 
     delete props.sidebar;
@@ -403,7 +408,7 @@ export class SidebarNav extends React.Component {
 
   render() {
     var classes = classNames('sidebar-nav',
-                              this.props.className);
+      this.props.className);
 
     if (this.props.sidebarNavItem) {
       this.props.sidebarNavItem.childSidebarNav = this;
@@ -415,7 +420,7 @@ export class SidebarNav extends React.Component {
     };
 
     var children = React.Children.map(this.props.children, (el) => {
-      switch(el.type) {
+      switch (el.type) {
         case SidebarNav:
         case SidebarNavItem:
           return React.cloneElement(el, {
@@ -605,7 +610,7 @@ export class SidebarNavItem extends React.Component {
     var topmostSidebar = this.getTopmostSidebar(node);
     var id = parseInt(topmostSidebar.getAttribute('data-id')) || 0;
 
-    Dispatcher.publish('sidebar:controlbtn', {sidebar: id});
+    Dispatcher.publish('sidebar:controlbtn', { sidebar: id });
     Dispatcher.publish('sidebar:keychange', id);
 
     for (var i = siblingLis.length - 1; i >= 0; i--) {
@@ -628,7 +633,7 @@ export class SidebarNavItem extends React.Component {
           Dispatcher.publish('sidebar:closeSidebar');
         }
       }, 300);
-    } catch(e) {
+    } catch (e) {
 
     }
   }
@@ -716,9 +721,9 @@ export class SidebarNavItem extends React.Component {
   }
 
   componentDidMount() {
-    this.activateHandler = Dispatcher.subscribe('sidebar:activate', ::this.activateSidebar);
-    this.closeHandler = Dispatcher.subscribe('sidebar:close', ::this.closeSidebarRoot);
-    this.searchHandler = Dispatcher.subscribe('sidebar:search', ::this.handleSearch);
+    this.activateHandler = Dispatcher.subscribe('sidebar:activate', :: this.activateSidebar);
+    this.closeHandler = Dispatcher.subscribe('sidebar:close', :: this.closeSidebarRoot);
+    this.searchHandler = Dispatcher.subscribe('sidebar:search', :: this.handleSearch);
 
     if (this.props.hasOwnProperty('href') && this.props.href.length && this.props.href !== '#') {
       routesStore[this.props.href] = this.state.active;
@@ -735,7 +740,7 @@ export class SidebarNavItem extends React.Component {
     }
 
     var node = ReactDOM.findDOMNode(this._node);
-    node.close = ::this.closeNav;
+    node.close = :: this.closeNav;
 
     enableStateForPathname(
       this.props.router.location.pathname,
@@ -754,14 +759,14 @@ export class SidebarNavItem extends React.Component {
       'open': this.state.toggleOpen,
       'opposite': this.state.opposite
     });
-    var icon=null, toggleButton = null;
-    if(this.props.children) {
-      toggleButton = <Icon className={toggleClasses.trim()} bundle='fontello' glyph={this.state.dir+'-open-3'} />;
+    var icon = null, toggleButton = null;
+    if (this.props.children) {
+      toggleButton = <Icon className={toggleClasses.trim()} bundle='fontello' glyph={this.state.dir + '-open-3'} />;
     }
-    if(this.props.glyph || this.props.bundle) {
+    if (this.props.glyph || this.props.bundle) {
       icon = <Icon bundle={this.props.bundle} glyph={this.props.glyph} />;
     }
-    var style = {height: this.props.autoHeight ? 'auto' : this.state.height};
+    var style = { height: this.props.autoHeight ? 'auto' : this.state.height };
 
     var props = {
       name: null,
@@ -776,16 +781,16 @@ export class SidebarNavItem extends React.Component {
       tabIndex: -1,
       href: this.props.href || '',
       onClick: this.handleClick,
-      style: {height: 45}
+      style: { height: 45 }
     };
 
     var pointerEvents = 'all';
-    if(this.props.hasOwnProperty('href') && this.props.href.length && this.props.href !== '#') {
+    if (this.props.hasOwnProperty('href') && this.props.href.length && this.props.href !== '#') {
       RouteLink = Link;
       componentProps.to = this.props.href;
       delete componentProps.href;
 
-      if(this.props.href.search(":") !== -1) {
+      if (this.props.href.search(":") !== -1) {
         pointerEvents = 'none';
       }
     }
@@ -801,9 +806,9 @@ export class SidebarNavItem extends React.Component {
     });
 
     return (
-      <Motion style={{height: spring(this.state.height, {stiffness: 300, damping: 20, precision: 0.0001})}}>
+      <Motion style={{ height: spring(this.state.height, { stiffness: 300, damping: 20, precision: 0.0001 }) }}>
         {(style) =>
-          <li ref={(c) => this._node = c} {...props} style={{display: this.props.hidden ? 'none': 'block', pointerEvents: pointerEvents, ...style}}>
+          <li ref={(c) => this._node = c} {...props} style={{ display: this.props.hidden ? 'none' : 'block', pointerEvents: pointerEvents, ...style }}>
             <RouteLink {...componentProps}>
               {icon}
               <span className='name'>{this.props.name}</span>
@@ -822,7 +827,7 @@ export class SidebarControls extends React.Component {
 
   render() {
     var classes = classNames('sidebar-controls-container',
-                              this.props.className);
+      this.props.className);
     var props = {
       dir: 'ltr',
       ...this.props,
@@ -863,11 +868,11 @@ export class SidebarControlBtn extends React.Component {
   };
 
   handleState(props) {
-    if(props.hasOwnProperty('sidebar')) {
-      if(props.sidebar === this.props.sidebar) {
-        this.setState({active: true});
+    if (props.hasOwnProperty('sidebar')) {
+      if (props.sidebar === this.props.sidebar) {
+        this.setState({ active: true });
       } else {
-        this.setState({active: false});
+        this.setState({ active: false });
       }
     }
   }
@@ -877,7 +882,7 @@ export class SidebarControlBtn extends React.Component {
   }
 
   componentDidMount() {
-    this.controlbtnHandler = Dispatcher.subscribe('sidebar:controlbtn', ::this.handleState);
+    this.controlbtnHandler = Dispatcher.subscribe('sidebar:controlbtn', :: this.handleState);
   }
 
   render() {
@@ -899,7 +904,7 @@ export class SidebarControlBtn extends React.Component {
     return (
       <li {...props}>
         <a href='#' tabIndex='-1'>
-          <Icon bundle={this.props.bundle} glyph={this.props.glyph}/>
+          <Icon bundle={this.props.bundle} glyph={this.props.glyph} />
         </a>
       </li>
     );
@@ -967,7 +972,8 @@ export class SidebarDivider extends React.Component {
         borderWidth: 2,
         marginTop: 15,
         marginBottom: 0,
-        width: 200}} />
+        width: 200
+      }} />
     );
   }
 }

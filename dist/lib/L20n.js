@@ -22,6 +22,8 @@ var _isBrowser2 = _interopRequireDefault(_isBrowser);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var createReactClass = require('create-react-class');
+
 var win = null;
 if (!(0, _isBrowser2.default)()) {
   win = {
@@ -73,7 +75,7 @@ var _initializeLocales = function _initializeLocales(locales, rpath) {
   ctx.requestLocales(locales.default);
 };
 
-var Entity = _react2.default.createClass({
+var Entity = createReactClass({
   displayName: 'Entity',
 
   propTypes: {
