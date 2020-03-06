@@ -1,10 +1,10 @@
 {
   "private": true,
-  "name": "@sketchpixy/rubix",
+  "name": "@harishjangra/rubix",
   "version": "3.1.0",
   "description": "Schoollog Bootstrap",
   "homepage": "https://schoollog.in/",
-  "author": "Harish <harish0212@yahoo.com>",
+  "author": "Harish Jangra <harish0212@yahoo.com>",
   "contributors": [
     "Schoollog <info@schoollog.in>"
   ],
@@ -25,8 +25,6 @@
     ]
   },
   "dependencies": {
-    "react-router-scroll": "^0.4.4",
-    "redux-fetch-data": "^0.1.4",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "es6-promise": "^4.2.8",
@@ -42,7 +40,9 @@
     "react-redux": "^4.4.5",
     "react-router": "^3.2.6",
     "react-router-redux": "^4.0.8",
+    "react-router-scroll": "^0.4.4",
     "redux": "^3.5.2",
+    "redux-fetch-data": "^0.1.4",
     "redux-thunk": "^2.1.0",
     "request-frame": "^1.4.1",
     "watch": "^0.19.1"
