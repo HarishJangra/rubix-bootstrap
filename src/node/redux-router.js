@@ -26,8 +26,8 @@ import {
   FetchData,
   fetchDataOnServer,
   reducer as fetching
-} from "redux-fetch-data";
-import { flattenComponents } from "redux-fetch-data/lib/utils";
+} from "@harishjangra/redux-fetch-data";
+import { flattenComponents } from "@harishjangra/redux-fetch-data/lib/utils";
 
 import onRouterSetup from "./onRouterSetup";
 import onRouterUpdate from "./onRouterUpdate";

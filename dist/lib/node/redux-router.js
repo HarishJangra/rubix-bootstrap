@@ -69,9 +69,9 @@ var _reduxThunk = require("redux-thunk");
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reduxFetchData = require("redux-fetch-data");
+var _reduxFetchData = require("@harishjangra/redux-fetch-data");
 
-var _utils = require("redux-fetch-data/lib/utils");
+var _utils = require("@harishjangra/redux-fetch-data/lib/utils");
 
 var _onRouterSetup = require("./onRouterSetup");
 

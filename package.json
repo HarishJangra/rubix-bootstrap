@@ -1,6 +1,6 @@
 {
   "name": "@harishjangra/rubix",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Schoollog Bootstrap",
   "homepage": "https://schoollog.in/",
   "author": "Harish Jangra <harish0212@yahoo.com>",
@@ -24,6 +24,7 @@
     ]
   },
   "dependencies": {
+    "@harishjangra/redux-fetch-data": "^0.1.5",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "es6-promise": "^4.2.8",
@@ -41,7 +42,6 @@
     "react-router-redux": "^4.0.8",
     "react-router-scroll": "^0.4.4",
     "redux": "^3.5.2",
-    "redux-fetch-data": "^0.1.4",
     "redux-thunk": "^2.1.0",
     "request-frame": "^1.4.1",
     "watch": "^0.19.1"
