@@ -1,16 +1,14 @@
-import classNames from 'classnames';
-import React from 'react';    import PropTypes from 'prop-types'
+import classNames from "classnames";
+import React from "react";
+import PropTypes from "prop-types";
 
-import Icon from './Icon';
-import Button from './Button';
-import TabContainer from 'react-bootstrap/lib/TabContainer';
+import Icon from "./Icon";
+import Button from "./Button";
+import TabContainer from "react-bootstrap/lib/TabContainer";
 
 export default class PanelContainer extends React.Component {
   static propTypes = {
-    controls: PropTypes.oneOfType([
-                PropTypes.bool,
-                PropTypes.element
-              ]),
+    controls: PropTypes.oneOfType([PropTypes.bool, PropTypes.element]),
     minimize: PropTypes.bool,
     containerClasses: PropTypes.string,
     collapseBottom: PropTypes.bool,
@@ -22,14 +20,17 @@ export default class PanelContainer extends React.Component {
     onShow: PropTypes.func,
     onHide: PropTypes.func,
     onToggle: PropTypes.func,
-    onRemove: PropTypes.func,
+    onRemove: PropTypes.func
   };
 
   constructor(...args) {
     super(...args);
 
     this.state = {
-      collapse: false, style: {}, hidden: false, glyph: 'minus'
+      collapse: false,
+      style: {},
+      hidden: false,
+      glyph: "minus"
     };
   }
 
@@ -51,7 +52,7 @@ export default class PanelContainer extends React.Component {
   show() {
     this.setState({
       hidden: false,
-      glyph: 'minus',
+      glyph: "minus",
       style: {}
     });
 
@@ -61,10 +62,10 @@ export default class PanelContainer extends React.Component {
   hide() {
     this.setState({
       hidden: true,
-      glyph: 'plus',
+      glyph: "plus",
       style: {
         height: 16,
-        overflow: 'hidden'
+        overflow: "hidden"
       }
     });
 
@@ -107,15 +108,15 @@ export default class PanelContainer extends React.Component {
 
   renderControls() {
     return (
-      <div className='rubix-panel-controls'>
-        <Button { ...this.getBtnProps(::this.maximize) }>
-          <Icon bundle='fontello' glyph='loop-alt-1' />
+      <div className="rubix-panel-controls">
+        <Button {...this.getBtnProps(::this.maximize)}>
+          <Icon bundle="fontello" glyph="loop-alt-1" />
         </Button>
-        <Button { ...this.getBtnProps(::this.toggle) }>
-          <Icon bundle='fontello' glyph={this.state.glyph} />
+        <Button {...this.getBtnProps(::this.toggle)}>
+          <Icon bundle="fontello" glyph={this.state.glyph} />
         </Button>
-        <Button { ...this.getBtnProps(::this.remove) }>
-          <Icon bundle='fontello' glyph='cancel' />
+        <Button {...this.getBtnProps(::this.remove)}>
+          <Icon bundle="fontello" glyph="cancel" />
         </Button>
       </div>
     );
@@ -129,25 +130,29 @@ export default class PanelContainer extends React.Component {
       controls = null;
     } else if (props.controls !== undefined) {
       controls = (
-        <div className='rubix-panel-controls'>
-          {this.props.controls}
-        </div>
+        <div className="rubix-panel-controls">{this.props.controls}</div>
       );
     }
 
-    props.className = classNames('rubix-panel-container-with-controls',
-                                  props.className,
-                                  {
-                                    active: this.state.style.height === 16,
-                                  });
+    props.className = classNames(
+      "rubix-panel-container-with-controls",
+      props.className,
+      {
+        active: this.state.style.height === 16
+      }
+    );
 
-    let panelClassname = classNames('rubix-panel-container', {
-      'bordered': this.props.bordered,
-      'panel-plain': this.props.plain,
-      'noOverflow': this.props.noOverflow,
-      'panel-gutter-bottom': this.props.gutterBottom,
-      'panel-collapse-bottom': this.props.collapseBottom,
-    }, this.props.containerClasses);
+    let panelClassname = classNames(
+      "rubix-panel-container",
+      {
+        bordered: this.props.bordered,
+        "panel-plain": this.props.plain,
+        noOverflow: this.props.noOverflow,
+        "panel-gutter-bottom": this.props.gutterBottom,
+        "panel-collapse-bottom": this.props.collapseBottom
+      },
+      this.props.containerClasses
+    );
 
     if (this.state.collapse) return null;
 
@@ -169,7 +174,7 @@ export default class PanelContainer extends React.Component {
     delete props.onSelect;
 
     return (
-      <div { ...props } ref={(c) => this._node = c}>
+      <div {...props} ref={c => (this._node = c)}>
         {controls}
         <div className={panelClassname} style={this.state.style}>
           {this.props.children}
@@ -184,18 +189,29 @@ export class PanelTabContainer extends React.Component {
     id: PropTypes.string.isRequired,
     defaultActiveKey: PropTypes.any,
     onSelect: PropTypes.func,
-    generateChildId: PropTypes.func,
+    generateChildId: PropTypes.func
   };
 
   render() {
     let props = {
       ...this.props,
-      className: classNames('panel-tab-container', this.props.className)
+      className: classNames("panel-tab-container", this.props.className)
     };
 
     return (
-      <TabContainer id={this.props.id} defaultActiveKey={this.props.defaultActiveKey} onSelect={this.props.onSelect} generateChildId={this.props.generateChildId}>
-        <PanelContainer { ...props } id={null} defaultActiveKey={null} onSelect={null} generateChildId={null} />
+      <TabContainer
+        id={this.props.id}
+        defaultActiveKey={this.props.defaultActiveKey}
+        onSelect={this.props.onSelect}
+        generateChildId={this.props.generateChildId}
+      >
+        <PanelContainer
+          {...props}
+          id={null}
+          defaultActiveKey={null}
+          onSelect={null}
+          generateChildId={null}
+        />
       </TabContainer>
     );
   }
@@ -208,17 +224,19 @@ export class Panel extends React.Component {
 
   render() {
     let props = { ...this.props };
-    props.className = classNames('rubix-panel', {
-      horizontal: props.horizontal
-    }, props.className);
+    props.className = classNames(
+      "rubix-panel",
+      {
+        horizontal: props.horizontal
+      },
+      props.className
+    );
 
     delete props.horizontal;
 
     return (
-      <div { ...props } children={null}>
-        <div>
-          {this.props.children}
-        </div>
+      <div {...props} children={null}>
+        <div>{this.props.children}</div>
       </div>
     );
   }
@@ -227,10 +245,10 @@ export class Panel extends React.Component {
 export class PanelHeader extends React.Component {
   render() {
     let props = { ...this.props };
-    props.className = classNames('rubix-panel-header', props.className);
+    props.className = classNames("rubix-panel-header", props.className);
 
     return (
-      <div { ...props } children={null}>
+      <div {...props} children={null}>
         {this.props.children}
       </div>
     );
@@ -240,10 +258,10 @@ export class PanelHeader extends React.Component {
 export class PanelFooter extends React.Component {
   render() {
     let props = { ...this.props };
-    props.className = classNames('rubix-panel-footer', props.className);
+    props.className = classNames("rubix-panel-footer", props.className);
 
     return (
-      <div { ...props } children={null}>
+      <div {...props} children={null}>
         {this.props.children}
       </div>
     );
@@ -253,10 +271,10 @@ export class PanelFooter extends React.Component {
 export class PanelLeft extends React.Component {
   render() {
     let props = { ...this.props };
-    props.className = classNames('rubix-panel-left', props.className);
+    props.className = classNames("rubix-panel-left", props.className);
 
     return (
-      <div { ...props } children={null}>
+      <div {...props} children={null}>
         {this.props.children}
       </div>
     );
@@ -266,10 +284,10 @@ export class PanelLeft extends React.Component {
 export class PanelRight extends React.Component {
   render() {
     let props = { ...this.props };
-    props.className = classNames('rubix-panel-right', props.className);
+    props.className = classNames("rubix-panel-right", props.className);
 
     return (
-      <div { ...props } children={null}>
+      <div {...props} children={null}>
         {this.props.children}
       </div>
     );
@@ -279,10 +297,10 @@ export class PanelRight extends React.Component {
 export class PanelBody extends React.Component {
   render() {
     let props = { ...this.props };
-    props.className = classNames('rubix-panel-body', props.className);
+    props.className = classNames("rubix-panel-body", props.className);
 
     return (
-      <div { ...props } children={null}>
+      <div {...props} children={null}>
         {this.props.children}
       </div>
     );

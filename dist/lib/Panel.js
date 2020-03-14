@@ -1,57 +1,57 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.PanelBody = exports.PanelRight = exports.PanelLeft = exports.PanelFooter = exports.PanelHeader = exports.Panel = exports.PanelTabContainer = exports.default = undefined;
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _extends2 = require("babel-runtime/helpers/extends");
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _getPrototypeOf = require("babel-runtime/core-js/object/get-prototype-of");
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _createClass2 = require("babel-runtime/helpers/createClass");
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _possibleConstructorReturn2 = require("babel-runtime/helpers/possibleConstructorReturn");
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _inherits2 = require("babel-runtime/helpers/inherits");
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp, _class2, _temp2, _class3, _temp3;
 
-var _classnames = require('classnames');
+var _classnames = require("classnames");
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Icon = require('./Icon');
+var _Icon = require("./Icon");
 
 var _Icon2 = _interopRequireDefault(_Icon);
 
-var _Button = require('./Button');
+var _Button = require("./Button");
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _TabContainer = require('react-bootstrap/lib/TabContainer');
+var _TabContainer = require("react-bootstrap/lib/TabContainer");
 
 var _TabContainer2 = _interopRequireDefault(_TabContainer);
 
@@ -72,13 +72,16 @@ var PanelContainer = (_temp = _class = function (_React$Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (_ref = PanelContainer.__proto__ || (0, _getPrototypeOf2.default)(PanelContainer)).call.apply(_ref, [this].concat(args)));
 
     _this.state = {
-      collapse: false, style: {}, hidden: false, glyph: 'minus'
+      collapse: false,
+      style: {},
+      hidden: false,
+      glyph: "minus"
     };
     return _this;
   }
 
   (0, _createClass3.default)(PanelContainer, [{
-    key: 'getBtnProps',
+    key: "getBtnProps",
     value: function getBtnProps(func) {
       return {
         onClick: func,
@@ -86,7 +89,7 @@ var PanelContainer = (_temp = _class = function (_React$Component) {
       };
     }
   }, {
-    key: 'remove',
+    key: "remove",
     value: function remove() {
       this.setState({
         collapse: true
@@ -95,25 +98,25 @@ var PanelContainer = (_temp = _class = function (_React$Component) {
       if (this.props.onRemove) this.props.onRemove();
     }
   }, {
-    key: 'show',
+    key: "show",
     value: function show() {
       this.setState({
         hidden: false,
-        glyph: 'minus',
+        glyph: "minus",
         style: {}
       });
 
       if (this.props.onShow) this.props.onShow();
     }
   }, {
-    key: 'hide',
+    key: "hide",
     value: function hide() {
       this.setState({
         hidden: true,
-        glyph: 'plus',
+        glyph: "plus",
         style: {
           height: 16,
-          overflow: 'hidden'
+          overflow: "hidden"
         }
       });
 
@@ -122,7 +125,7 @@ var PanelContainer = (_temp = _class = function (_React$Component) {
       if (this.props.onHide) this.props.onHide();
     }
   }, {
-    key: 'toggle',
+    key: "toggle",
     value: function toggle() {
       if (this.state.hidden) {
         this.show();
@@ -133,14 +136,14 @@ var PanelContainer = (_temp = _class = function (_React$Component) {
       if (this.props.onToggle) this.props.onToggle();
     }
   }, {
-    key: 'maximize',
+    key: "maximize",
     value: function maximize() {
       if (this.props.handleMaximize) {
         this.props.handleMaximize();
       }
     }
   }, {
-    key: 'componentWillReceiveProps',
+    key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(_ref2, oldProps) {
       var minimize = _ref2.minimize;
 
@@ -153,37 +156,37 @@ var PanelContainer = (_temp = _class = function (_React$Component) {
       }
     }
   }, {
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       if (this.props.minimize === true) {
         this.hide();
       }
     }
   }, {
-    key: 'renderControls',
+    key: "renderControls",
     value: function renderControls() {
       return _react2.default.createElement(
-        'div',
-        { className: 'rubix-panel-controls' },
+        "div",
+        { className: "rubix-panel-controls" },
         _react2.default.createElement(
           _Button2.default,
           this.getBtnProps(this.maximize.bind(this)),
-          _react2.default.createElement(_Icon2.default, { bundle: 'fontello', glyph: 'loop-alt-1' })
+          _react2.default.createElement(_Icon2.default, { bundle: "fontello", glyph: "loop-alt-1" })
         ),
         _react2.default.createElement(
           _Button2.default,
           this.getBtnProps(this.toggle.bind(this)),
-          _react2.default.createElement(_Icon2.default, { bundle: 'fontello', glyph: this.state.glyph })
+          _react2.default.createElement(_Icon2.default, { bundle: "fontello", glyph: this.state.glyph })
         ),
         _react2.default.createElement(
           _Button2.default,
           this.getBtnProps(this.remove.bind(this)),
-          _react2.default.createElement(_Icon2.default, { bundle: 'fontello', glyph: 'cancel' })
+          _react2.default.createElement(_Icon2.default, { bundle: "fontello", glyph: "cancel" })
         )
       );
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
@@ -194,22 +197,22 @@ var PanelContainer = (_temp = _class = function (_React$Component) {
         controls = null;
       } else if (props.controls !== undefined) {
         controls = _react2.default.createElement(
-          'div',
-          { className: 'rubix-panel-controls' },
+          "div",
+          { className: "rubix-panel-controls" },
           this.props.controls
         );
       }
 
-      props.className = (0, _classnames2.default)('rubix-panel-container-with-controls', props.className, {
+      props.className = (0, _classnames2.default)("rubix-panel-container-with-controls", props.className, {
         active: this.state.style.height === 16
       });
 
-      var panelClassname = (0, _classnames2.default)('rubix-panel-container', {
-        'bordered': this.props.bordered,
-        'panel-plain': this.props.plain,
-        'noOverflow': this.props.noOverflow,
-        'panel-gutter-bottom': this.props.gutterBottom,
-        'panel-collapse-bottom': this.props.collapseBottom
+      var panelClassname = (0, _classnames2.default)("rubix-panel-container", {
+        bordered: this.props.bordered,
+        "panel-plain": this.props.plain,
+        noOverflow: this.props.noOverflow,
+        "panel-gutter-bottom": this.props.gutterBottom,
+        "panel-collapse-bottom": this.props.collapseBottom
       }, this.props.containerClasses);
 
       if (this.state.collapse) return null;
@@ -232,13 +235,13 @@ var PanelContainer = (_temp = _class = function (_React$Component) {
       delete props.onSelect;
 
       return _react2.default.createElement(
-        'div',
+        "div",
         (0, _extends3.default)({}, props, { ref: function ref(c) {
             return _this2._node = c;
           } }),
         controls,
         _react2.default.createElement(
-          'div',
+          "div",
           { className: panelClassname, style: this.state.style },
           this.props.children
         )
@@ -271,16 +274,26 @@ var PanelTabContainer = exports.PanelTabContainer = (_temp2 = _class2 = function
   }
 
   (0, _createClass3.default)(PanelTabContainer, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var props = (0, _extends3.default)({}, this.props, {
-        className: (0, _classnames2.default)('panel-tab-container', this.props.className)
+        className: (0, _classnames2.default)("panel-tab-container", this.props.className)
       });
 
       return _react2.default.createElement(
         _TabContainer2.default,
-        { id: this.props.id, defaultActiveKey: this.props.defaultActiveKey, onSelect: this.props.onSelect, generateChildId: this.props.generateChildId },
-        _react2.default.createElement(PanelContainer, (0, _extends3.default)({}, props, { id: null, defaultActiveKey: null, onSelect: null, generateChildId: null }))
+        {
+          id: this.props.id,
+          defaultActiveKey: this.props.defaultActiveKey,
+          onSelect: this.props.onSelect,
+          generateChildId: this.props.generateChildId
+        },
+        _react2.default.createElement(PanelContainer, (0, _extends3.default)({}, props, {
+          id: null,
+          defaultActiveKey: null,
+          onSelect: null,
+          generateChildId: null
+        }))
       );
     }
   }]);
@@ -300,20 +313,20 @@ var Panel = exports.Panel = (_temp3 = _class3 = function (_React$Component3) {
   }
 
   (0, _createClass3.default)(Panel, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var props = (0, _extends3.default)({}, this.props);
-      props.className = (0, _classnames2.default)('rubix-panel', {
+      props.className = (0, _classnames2.default)("rubix-panel", {
         horizontal: props.horizontal
       }, props.className);
 
       delete props.horizontal;
 
       return _react2.default.createElement(
-        'div',
+        "div",
         (0, _extends3.default)({}, props, { children: null }),
         _react2.default.createElement(
-          'div',
+          "div",
           null,
           this.props.children
         )
@@ -334,13 +347,13 @@ var PanelHeader = exports.PanelHeader = function (_React$Component4) {
   }
 
   (0, _createClass3.default)(PanelHeader, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var props = (0, _extends3.default)({}, this.props);
-      props.className = (0, _classnames2.default)('rubix-panel-header', props.className);
+      props.className = (0, _classnames2.default)("rubix-panel-header", props.className);
 
       return _react2.default.createElement(
-        'div',
+        "div",
         (0, _extends3.default)({}, props, { children: null }),
         this.props.children
       );
@@ -358,13 +371,13 @@ var PanelFooter = exports.PanelFooter = function (_React$Component5) {
   }
 
   (0, _createClass3.default)(PanelFooter, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var props = (0, _extends3.default)({}, this.props);
-      props.className = (0, _classnames2.default)('rubix-panel-footer', props.className);
+      props.className = (0, _classnames2.default)("rubix-panel-footer", props.className);
 
       return _react2.default.createElement(
-        'div',
+        "div",
         (0, _extends3.default)({}, props, { children: null }),
         this.props.children
       );
@@ -382,13 +395,13 @@ var PanelLeft = exports.PanelLeft = function (_React$Component6) {
   }
 
   (0, _createClass3.default)(PanelLeft, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var props = (0, _extends3.default)({}, this.props);
-      props.className = (0, _classnames2.default)('rubix-panel-left', props.className);
+      props.className = (0, _classnames2.default)("rubix-panel-left", props.className);
 
       return _react2.default.createElement(
-        'div',
+        "div",
         (0, _extends3.default)({}, props, { children: null }),
         this.props.children
       );
@@ -406,13 +419,13 @@ var PanelRight = exports.PanelRight = function (_React$Component7) {
   }
 
   (0, _createClass3.default)(PanelRight, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var props = (0, _extends3.default)({}, this.props);
-      props.className = (0, _classnames2.default)('rubix-panel-right', props.className);
+      props.className = (0, _classnames2.default)("rubix-panel-right", props.className);
 
       return _react2.default.createElement(
-        'div',
+        "div",
         (0, _extends3.default)({}, props, { children: null }),
         this.props.children
       );
@@ -430,13 +443,13 @@ var PanelBody = exports.PanelBody = function (_React$Component8) {
   }
 
   (0, _createClass3.default)(PanelBody, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var props = (0, _extends3.default)({}, this.props);
-      props.className = (0, _classnames2.default)('rubix-panel-body', props.className);
+      props.className = (0, _classnames2.default)("rubix-panel-body", props.className);
 
       return _react2.default.createElement(
-        'div',
+        "div",
         (0, _extends3.default)({}, props, { children: null }),
         this.props.children
       );

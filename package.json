@@ -1,6 +1,6 @@
 {
   "name": "@harishjangra/rubix",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "description": "Schoollog Bootstrap",
   "homepage": "https://schoollog.in/",
   "author": "Harish Jangra <harish0212@yahoo.com>",
@@ -33,7 +33,7 @@
     "pubsub-js": "^1.5.3",
     "query-string": "^4.2.2",
     "react": "^16.8.6",
-    "react-bootstrap": "^0.32.4",
+    "react-bootstrap": "^0.33.1",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^3.0.0-beta.2",
     "react-motion": "^0.4.4",

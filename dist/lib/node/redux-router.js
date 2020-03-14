@@ -55,10 +55,6 @@ var _reactRouter = require("react-router");
 
 var _reactHotLoader = require("react-hot-loader");
 
-var _reactRouterScroll = require("react-router-scroll");
-
-var _reactRouterScroll2 = _interopRequireDefault(_reactRouterScroll);
-
 var _reactRedux = require("react-redux");
 
 var _redux = require("redux");
@@ -70,8 +66,6 @@ var _reduxThunk = require("redux-thunk");
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
 var _reduxFetchData = require("@harishjangra/redux-fetch-data");
-
-var _utils = require("@harishjangra/redux-fetch-data/lib/utils");
 
 var _onRouterSetup = require("./onRouterSetup");
 

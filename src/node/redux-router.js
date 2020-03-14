@@ -10,7 +10,6 @@ import {
   browserHistory
 } from "react-router";
 import { AppContainer } from "react-hot-loader";
-import useScroll from "react-router-scroll";
 
 import { Provider } from "react-redux";
 import {
@@ -27,7 +26,6 @@ import {
   fetchDataOnServer,
   reducer as fetching
 } from "@harishjangra/redux-fetch-data";
-import { flattenComponents } from "@harishjangra/redux-fetch-data/lib/utils";
 
 import onRouterSetup from "./onRouterSetup";
 import onRouterUpdate from "./onRouterUpdate";
