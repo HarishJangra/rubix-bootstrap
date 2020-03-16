@@ -1,53 +1,53 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = undefined;
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _extends2 = require("babel-runtime/helpers/extends");
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _getPrototypeOf = require("babel-runtime/core-js/object/get-prototype-of");
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _createClass2 = require("babel-runtime/helpers/createClass");
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _possibleConstructorReturn2 = require("babel-runtime/helpers/possibleConstructorReturn");
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _inherits2 = require("babel-runtime/helpers/inherits");
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp;
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Form = require('react-bootstrap/lib/Form');
+var _Form = require("react-bootstrap/lib/Form");
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _FormGroup = require('./FormGroup');
+var _FormGroup = require("./FormGroup");
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
 
-var _FormControl = require('./FormControl');
+var _FormControl = require("./FormControl");
 
 var _FormControl2 = _interopRequireDefault(_FormControl);
 
@@ -62,7 +62,7 @@ var Form = (_temp = _class = function (_React$Component) {
   }
 
   (0, _createClass3.default)(Form, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var props = (0, _extends3.default)({}, this.props);
 
@@ -71,24 +71,24 @@ var Form = (_temp = _class = function (_React$Component) {
       if (!props.allowAutoComplete) {
         return _react2.default.createElement(
           _Form2.default,
-          (0, _extends3.default)({}, props, { autoComplete: 'off' }),
+          (0, _extends3.default)({}, props, { autoComplete: "off" }),
           _react2.default.createElement(
-            'div',
-            { style: { height: 0, visibility: 'hidden' } },
+            "div",
+            { style: { height: 0, visibility: "hidden" } },
             _react2.default.createElement(
               _FormGroup2.default,
               null,
-              _react2.default.createElement(_FormControl2.default, { type: 'text' })
+              _react2.default.createElement(_FormControl2.default, { name: "__test__", type: "text" })
             ),
             _react2.default.createElement(
               _FormGroup2.default,
               null,
-              _react2.default.createElement(_FormControl2.default, { type: 'email' })
+              _react2.default.createElement(_FormControl2.default, { name: "__testemail__", type: "email" })
             ),
             _react2.default.createElement(
               _FormGroup2.default,
               null,
-              _react2.default.createElement(_FormControl2.default, { type: 'password' })
+              _react2.default.createElement(_FormControl2.default, { type: "__password__" })
             )
           ),
           this.props.children
