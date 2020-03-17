@@ -1,6 +1,6 @@
 {
   "name": "@harishjangra/rubix",
-  "version": "2.9.99",
+  "version": "2.10.99",
   "description": "Schoollog Bootstrap",
   "homepage": "https://schoollog.in/",
   "author": "Harish Jangra <harish0212@yahoo.com>",
@@ -29,6 +29,7 @@
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "es6-promise": "^4.2.8",
+    "invariant": "^2.2.4",
     "lodash-compat": "^3.10.2",
     "prop-types": "^15.7.2",
     "pubsub-js": "^1.5.3",

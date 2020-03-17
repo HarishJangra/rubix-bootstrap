@@ -49,7 +49,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = require("react-router-dom");
 
-var _PatternUtils = require("react-router/lib/PatternUtils");
+var _PatternUtils = require("./utils/PatternUtils");
 
 var _classnames = require("classnames");
 
