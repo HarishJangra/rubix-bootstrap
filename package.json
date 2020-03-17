@@ -1,6 +1,6 @@
 {
   "name": "@harishjangra/rubix",
-  "version": "3.1.6",
+  "version": "4.0.0",
   "description": "Schoollog Bootstrap",
   "homepage": "https://schoollog.in/",
   "author": "Harish Jangra <harish0212@yahoo.com>",
@@ -39,6 +39,7 @@
     "react-motion": "^0.4.4",
     "react-redux": "^4.4.5",
     "react-router": "^3.2.6",
+    "react-router-dom": "^5.1.2",
     "react-router-redux": "^4.0.8",
     "react-router-scroll": "^0.4.4",
     "redux": "^3.5.2",

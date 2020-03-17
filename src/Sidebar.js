@@ -1,19 +1,20 @@
-import React from 'react'; import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom';
-import { Link, withRouter } from 'react-router';
-import { matchPattern } from 'react-router/lib/PatternUtils';
-import classNames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import { Link, withRouter } from "react-router-dom";
+import { matchPattern } from "react-router-dom/lib/PatternUtils";
+import classNames from "classnames";
 
-import { Motion, spring } from 'react-motion';
+import { Motion, spring } from "react-motion";
 
-import Icon from './Icon';
-import Dispatcher from './Dispatcher';
+import Icon from "./Icon";
+import Dispatcher from "./Dispatcher";
 
-import isBrowser from './isBrowser';
-import isTouchDevice from './isTouchDevice';
+import isBrowser from "./isBrowser";
+import isTouchDevice from "./isTouchDevice";
 
-import Nav from './Nav';
-import NavItem from './NavItem';
+import Nav from "./Nav";
+import NavItem from "./NavItem";
 
 var routesStore = {};
 
@@ -31,25 +32,27 @@ function enableStateForPathname(pathname, params) {
 
 function matchRoute(pattern, pathname, params) {
   var remainingPathname = pathname;
-  var paramNames = [], paramValues = [];
+  var paramNames = [],
+    paramValues = [];
 
   if (remainingPathname !== null && pattern) {
-    const matched = matchPattern(pattern, remainingPathname)
+    const matched = matchPattern(pattern, remainingPathname);
 
     if (!matched || !matched.paramNames || !matched.paramValues) {
       return false;
     }
-    remainingPathname = matched.remainingPathname
-    paramNames = [...paramNames, ...matched.paramNames]
-    paramValues = [...paramValues, ...matched.paramValues]
+    remainingPathname = matched.remainingPathname;
+    paramNames = [...paramNames, ...matched.paramNames];
+    paramValues = [...paramValues, ...matched.paramValues];
 
-    if (remainingPathname === '') {
+    if (remainingPathname === "") {
       // We have an exact match on the route. Just check that all the params
       // match.
       // FIXME: This doesn't work on repeated params.
-      return (paramNames.every((paramName, index) => (
-        (String(paramValues[index]) === String(params[paramName]))
-      )));
+      return paramNames.every(
+        (paramName, index) =>
+          String(paramValues[index]) === String(params[paramName])
+      );
     }
   }
 
@@ -57,7 +60,8 @@ function matchRoute(pattern, pathname, params) {
 }
 
 function matchRoutes(routes, pathname, params) {
-  var matched = false, patternMatched = '';
+  var matched = false,
+    patternMatched = "";
   for (var i = 0; i < routes.length; i++) {
     if (matchRoute(routes[i], pathname, params)) {
       if (matched == true) {
@@ -79,7 +83,11 @@ function matchRoutes(routes, pathname, params) {
 }
 
 function getOpenState() {
-  return (!isTouchDevice()) ? (localStorage.getItem('sidebar-open-state') === 'true' ? true : false) : false;
+  return !isTouchDevice()
+    ? localStorage.getItem("sidebar-open-state") === "true"
+      ? true
+      : false
+    : false;
 }
 
 class MainContainer extends React.Component {
@@ -90,8 +98,8 @@ class MainContainer extends React.Component {
     };
   }
   constructor(props) {
-    super(props)
-    this.state = this.getInitialState()
+    super(props);
+    this.state = this.getInitialState();
   }
 
   isOpen(open) {
@@ -102,14 +110,14 @@ class MainContainer extends React.Component {
       open: false,
       forceClose: forceClose
     });
-    localStorage.setItem('sidebar-open-state', false);
+    localStorage.setItem("sidebar-open-state", false);
   }
   openSidebar(forceClose = false) {
     this.setState({
       open: true,
       forceClose: forceClose
     });
-    localStorage.setItem('sidebar-open-state', true);
+    localStorage.setItem("sidebar-open-state", true);
   }
   toggleSidebar() {
     if (this.state.forceClose) {
@@ -129,13 +137,13 @@ class MainContainer extends React.Component {
     this.setState({
       open: openState // toggle sidebar
     });
-    localStorage.setItem('sidebar-open-state', openState);
+    localStorage.setItem("sidebar-open-state", openState);
   }
   enablePath(props) {
     if (props) {
-      enableStateForPathname(props.location.pathname, props.params);
+      enableStateForPathname(props.location.pathname, props.match.params);
     }
-    Dispatcher.publish('sidebar:activate');
+    Dispatcher.publish("sidebar:activate");
   }
   componentWillReceiveProps(nextProps) {
     setTimeout(() => {
@@ -158,38 +166,38 @@ class MainContainer extends React.Component {
       var change = Math.abs(touches.pageX - this.startX);
       var hasSwiped = change > 25;
 
-      var body = document.getElementById('body');
-      var sidebar = document.getElementById('sidebar');
-      var header = document.getElementById('rubix-nav-header');
+      var body = document.getElementById("body");
+      var sidebar = document.getElementById("sidebar");
+      var header = document.getElementById("rubix-nav-header");
       if (hasSwiped) {
         if (!this.state.open) {
           if (change > 250) return;
-          body.style.marginLeft = change + 'px';
-          body.style.marginRight = -change + 'px';
-          sidebar.style.left = (-250 + change) + 'px';
-          header.style.marginLeft = change + 'px';
-          header.style.marginRight = -change + 'px';
+          body.style.marginLeft = change + "px";
+          body.style.marginRight = -change + "px";
+          sidebar.style.left = -250 + change + "px";
+          header.style.marginLeft = change + "px";
+          header.style.marginRight = -change + "px";
         } else {
-          if ((250 - change) < 0) return;
-          body.style.marginLeft = (250 - change) + 'px';
-          body.style.marginRight = -(250 - change) + 'px';
-          sidebar.style.left = 0 - (250 - change) + 'px';
-          header.style.marginLeft = (250 - change) + 'px';
-          header.style.marginRight = -(250 - change) + 'px';
+          if (250 - change < 0) return;
+          body.style.marginLeft = 250 - change + "px";
+          body.style.marginRight = -(250 - change) + "px";
+          sidebar.style.left = 0 - (250 - change) + "px";
+          header.style.marginLeft = 250 - change + "px";
+          header.style.marginRight = -(250 - change) + "px";
         }
       }
     }
   }
   cancelSwipe(e) {
     this.startX = 0;
-    var body = document.getElementById('body');
-    var sidebar = document.getElementById('sidebar');
-    var header = document.getElementById('rubix-nav-header');
-    body.style.marginLeft = '';
-    body.style.marginRight = '';
-    sidebar.style.left = '';
-    header.style.marginLeft = '';
-    header.style.marginRight = '';
+    var body = document.getElementById("body");
+    var sidebar = document.getElementById("sidebar");
+    var header = document.getElementById("rubix-nav-header");
+    body.style.marginLeft = "";
+    body.style.marginRight = "";
+    sidebar.style.left = "";
+    header.style.marginLeft = "";
+    header.style.marginRight = "";
     this.setState({
       open: false
     });
@@ -197,19 +205,19 @@ class MainContainer extends React.Component {
   endSwipe(e) {
     if (e.changedTouches.length) {
       var touches = e.changedTouches[0];
-      var change = (touches.pageX - this.startX);
+      var change = touches.pageX - this.startX;
       var hasSwiped = Math.abs(change) > 25;
 
-      var body = document.getElementById('body');
-      var sidebar = document.getElementById('sidebar');
-      var header = document.getElementById('rubix-nav-header');
+      var body = document.getElementById("body");
+      var sidebar = document.getElementById("sidebar");
+      var header = document.getElementById("rubix-nav-header");
 
       if (hasSwiped) {
-        body.style.marginLeft = '';
-        body.style.marginRight = '';
-        sidebar.style.left = '';
-        header.style.marginLeft = '';
-        header.style.marginRight = '';
+        body.style.marginLeft = "";
+        body.style.marginRight = "";
+        sidebar.style.left = "";
+        header.style.marginLeft = "";
+        header.style.marginRight = "";
 
         if (!this.state.open) {
           this.setState({
@@ -229,9 +237,18 @@ class MainContainer extends React.Component {
     Dispatcher.unsubscribe(this.toggleSidebar);
   }
   componentDidMount() {
-    this.handler = Dispatcher.subscribe('sidebar', this.sidebarStateChangeCallback);
-    this.closeHandler = Dispatcher.subscribe('sidebar:closeSidebar', this.closeSidebar);
-    this.closeHandler = Dispatcher.subscribe('sidebar:toggleSidebar', this.toggleSidebar);
+    this.handler = Dispatcher.subscribe(
+      "sidebar",
+      this.sidebarStateChangeCallback
+    );
+    this.closeHandler = Dispatcher.subscribe(
+      "sidebar:closeSidebar",
+      this.closeSidebar
+    );
+    this.closeHandler = Dispatcher.subscribe(
+      "sidebar:toggleSidebar",
+      this.toggleSidebar
+    );
 
     var openState = getOpenState();
     this.setState({
@@ -242,23 +259,22 @@ class MainContainer extends React.Component {
   }
   render() {
     var classes = classNames({
-      'container-open': this.state.open,
-      'force-close': this.state.forceClose,
+      "container-open": this.state.open,
+      "force-close": this.state.forceClose
     });
 
     return (
-      <div id='container' className={classes}>
+      <div id="container" className={classes}>
         {this.props.children}
       </div>
     );
   }
-
 }
 
 export default MainContainer;
 
 export class Sidebar extends React.Component {
-  static belongsTo = 'Sidebar';
+  static belongsTo = "Sidebar";
 
   constructor(props) {
     super(props);
@@ -266,8 +282,8 @@ export class Sidebar extends React.Component {
     this.timer = null;
 
     this.state = {
-      left: ((props.sidebar * 100) + '%'),
-      visibility: (props.sidebar === 0) ? 'visible' : 'hidden'
+      left: props.sidebar * 100 + "%",
+      visibility: props.sidebar === 0 ? "visible" : "hidden"
     };
 
     this.reinitializeScrollbarHandler = null;
@@ -283,8 +299,8 @@ export class Sidebar extends React.Component {
 
     while (child_node.parentNode) {
       if (child_node.parentNode === node) {
-        if (scrollTo > (window.innerHeight / 2)) {
-          node.scrollTop = (scrollTo - (window.innerHeight / 2) + 100);
+        if (scrollTo > window.innerHeight / 2) {
+          node.scrollTop = scrollTo - window.innerHeight / 2 + 100;
         }
         break;
       }
@@ -326,10 +342,10 @@ export class Sidebar extends React.Component {
   }
 
   handleKeyChange(sidebar) {
-    var newLeft = ((this.props.sidebar * 100) - (sidebar * 100)) + '%';
+    var newLeft = this.props.sidebar * 100 - sidebar * 100 + "%";
     this.setState({
       left: newLeft,
-      visibility: 'visible'
+      visibility: "visible"
     });
   }
 
@@ -344,15 +360,30 @@ export class Sidebar extends React.Component {
   componentDidMount() {
     this.initializeScrollbar();
 
-    this.reinitializeScrollbarHandler = Dispatcher.subscribe('sidebar:reinitialize', :: this.initializeScrollbar);
-    this.destroyScrollbarHandler = Dispatcher.subscribe('sidebar:destroy', :: this.destroyScrollbar)
-    this.repositionHandler = Dispatcher.subscribe('sidebar:reposition', :: this.repositionScrollbar);
-    this.keychangeHandler = Dispatcher.subscribe('sidebar:keychange', :: this.handleKeyChange);
-    this.updateHandler = Dispatcher.subscribe('sidebar:update', :: this.updateScrollbar);
+    this.reinitializeScrollbarHandler = Dispatcher.subscribe(
+      "sidebar:reinitialize",
+      ::this.initializeScrollbar
+    );
+    this.destroyScrollbarHandler = Dispatcher.subscribe(
+      "sidebar:destroy",
+      ::this.destroyScrollbar
+    );
+    this.repositionHandler = Dispatcher.subscribe(
+      "sidebar:reposition",
+      ::this.repositionScrollbar
+    );
+    this.keychangeHandler = Dispatcher.subscribe(
+      "sidebar:keychange",
+      ::this.handleKeyChange
+    );
+    this.updateHandler = Dispatcher.subscribe(
+      "sidebar:update",
+      ::this.updateScrollbar
+    );
 
     if (this.props.active) {
-      Dispatcher.publish('sidebar:controlbtn', this.props);
-      Dispatcher.publish('sidebar:keychange', this.props.sidebar);
+      Dispatcher.publish("sidebar:controlbtn", this.props);
+      Dispatcher.publish("sidebar:keychange", this.props.sidebar);
     }
   }
 
@@ -361,30 +392,33 @@ export class Sidebar extends React.Component {
       style: {
         left: this.state.left,
         visibility: this.state.visibility,
-        transition: 'all 0.3s ease',
-        OTransition: 'all 0.3s ease',
-        MsTransition: 'all 0.3s ease',
-        MozTransition: 'all 0.3s ease',
-        WebkitTransition: 'all 0.3s ease'
+        transition: "all 0.3s ease",
+        OTransition: "all 0.3s ease",
+        MsTransition: "all 0.3s ease",
+        MozTransition: "all 0.3s ease",
+        WebkitTransition: "all 0.3s ease"
       },
       ...this.props,
-      className: classNames('sidebar',
-        'sidebar__main',
-        this.props.className)
+      className: classNames("sidebar", "sidebar__main", this.props.className)
     };
 
     delete props.sidebar;
 
     return (
-      <div ref='sidebar' {...props} children={null} data-id={this.props.sidebar}>
-        <div ref='innersidebar'>{this.props.children}</div>
+      <div
+        ref="sidebar"
+        {...props}
+        children={null}
+        data-id={this.props.sidebar}
+      >
+        <div ref="innersidebar">{this.props.children}</div>
       </div>
     );
   }
 }
 
 export class SidebarNav extends React.Component {
-  static belongsTo = 'Sidebar';
+  static belongsTo = "Sidebar";
 
   static id = 0;
 
@@ -403,12 +437,11 @@ export class SidebarNav extends React.Component {
   }
 
   search(text) {
-    Dispatcher.publish('sidebar:search', text, this.getID());
+    Dispatcher.publish("sidebar:search", text, this.getID());
   }
 
   render() {
-    var classes = classNames('sidebar-nav',
-      this.props.className);
+    var classes = classNames("sidebar-nav", this.props.className);
 
     if (this.props.sidebarNavItem) {
       this.props.sidebarNavItem.childSidebarNav = this;
@@ -419,7 +452,7 @@ export class SidebarNav extends React.Component {
       className: classes
     };
 
-    var children = React.Children.map(this.props.children, (el) => {
+    var children = React.Children.map(this.props.children, el => {
       switch (el.type) {
         case SidebarNav:
         case SidebarNavItem:
@@ -438,7 +471,7 @@ export class SidebarNav extends React.Component {
     delete props.rootSidebarNavItem;
 
     return (
-      <ul ref='ul' {...props}>
+      <ul ref="ul" {...props}>
         {children}
       </ul>
     );
@@ -447,7 +480,7 @@ export class SidebarNav extends React.Component {
 
 @withRouter
 export class SidebarNavItem extends React.Component {
-  static belongsTo = 'Sidebar';
+  static belongsTo = "Sidebar";
 
   constructor(props) {
     super(props);
@@ -456,9 +489,9 @@ export class SidebarNavItem extends React.Component {
       open: props.open || false,
       active: props.active || false,
       toggleOpen: props.open || false,
-      dir: 'left',
+      dir: "left",
       opposite: false,
-      height: 45,
+      height: 45
     };
 
     this.routes = [];
@@ -470,8 +503,8 @@ export class SidebarNavItem extends React.Component {
 
   handleLayoutDirChange(dir) {
     this.setState({
-      dir: dir === 'ltr' ? 'left' : 'right',
-      opposite: dir === 'ltr' ? false : true
+      dir: dir === "ltr" ? "left" : "right",
+      opposite: dir === "ltr" ? false : true
     });
   }
 
@@ -491,24 +524,37 @@ export class SidebarNavItem extends React.Component {
     var totalHeight = height + thisHeight;
 
     if (this.childSidebarNav) {
-      this.setState({
-        height: totalHeight,
-        open: true,
-        toggleOpen: true,
-      }, () => {
-        Dispatcher.publish('sidebar:update');
-        if (this.props.sidebarNavItem) {
-          if (isClosing) {
-            this.props.sidebarNavItem.openSidebarNav(false, 45 - totalHeight, true);
-          } else {
-            if (fullOpen) {
-              this.props.sidebarNavItem.openSidebarNav(true, totalHeight - 45);
+      this.setState(
+        {
+          height: totalHeight,
+          open: true,
+          toggleOpen: true
+        },
+        () => {
+          Dispatcher.publish("sidebar:update");
+          if (this.props.sidebarNavItem) {
+            if (isClosing) {
+              this.props.sidebarNavItem.openSidebarNav(
+                false,
+                45 - totalHeight,
+                true
+              );
             } else {
-              this.props.sidebarNavItem.openSidebarNav(false, thisHeight - 45);
+              if (fullOpen) {
+                this.props.sidebarNavItem.openSidebarNav(
+                  true,
+                  totalHeight - 45
+                );
+              } else {
+                this.props.sidebarNavItem.openSidebarNav(
+                  false,
+                  thisHeight - 45
+                );
+              }
             }
           }
         }
-      });
+      );
     }
   }
 
@@ -517,16 +563,23 @@ export class SidebarNavItem extends React.Component {
 
     var thisHeight = this.getTotalHeight();
     if (this.childSidebarNav) {
-      this.setState({
-        height: 45,
-        open: false,
-        toggleOpen: false,
-      }, () => {
-        Dispatcher.publish('sidebar:update');
-        if (this.props.sidebarNavItem) {
-          this.props.sidebarNavItem.openSidebarNav(false, 45 - thisHeight, true);
+      this.setState(
+        {
+          height: 45,
+          open: false,
+          toggleOpen: false
+        },
+        () => {
+          Dispatcher.publish("sidebar:update");
+          if (this.props.sidebarNavItem) {
+            this.props.sidebarNavItem.openSidebarNav(
+              false,
+              45 - thisHeight,
+              true
+            );
+          }
         }
-      });
+      );
     }
   }
 
@@ -541,7 +594,7 @@ export class SidebarNavItem extends React.Component {
   getTopmostLi(node, li, original_node) {
     if (!original_node) original_node = node;
     while (node.parentNode) {
-      if (node.parentNode.className.search('sidebar-nav-container') !== -1) {
+      if (node.parentNode.className.search("sidebar-nav-container") !== -1) {
         if (li) {
           return li;
         } else {
@@ -549,7 +602,7 @@ export class SidebarNavItem extends React.Component {
         }
       }
 
-      if (node.parentNode.nodeName.toLowerCase() === 'li') {
+      if (node.parentNode.nodeName.toLowerCase() === "li") {
         li = node.parentNode;
       }
       node = node.parentNode;
@@ -576,14 +629,14 @@ export class SidebarNavItem extends React.Component {
     var original_node = node;
     var siblings = [];
     while (node.nextSibling) {
-      if (node.nextSibling.className.search('sidebar-nav') !== -1) {
+      if (node.nextSibling.className.search("sidebar-nav") !== -1) {
         siblings.push(node.nextSibling);
       }
       node = node.nextSibling;
     }
     node = original_node;
     while (node.previousSibling) {
-      if (node.previousSibling.className.search('sidebar-nav') !== -1) {
+      if (node.previousSibling.className.search("sidebar-nav") !== -1) {
         siblings.push(node.previousSibling);
       }
       node = node.previousSibling;
@@ -594,7 +647,7 @@ export class SidebarNavItem extends React.Component {
 
   getTopmostSidebar(node) {
     while (node.parentNode) {
-      if (node.parentNode.className.search('sidebar__main') !== -1) {
+      if (node.parentNode.className.search("sidebar__main") !== -1) {
         return node.parentNode;
       }
       node = node.parentNode;
@@ -608,69 +661,68 @@ export class SidebarNavItem extends React.Component {
     var topmostSiblingLis = this.getSiblingsLi(topmostLi);
     var siblingLis = this.getSiblingsLi(node);
     var topmostSidebar = this.getTopmostSidebar(node);
-    var id = parseInt(topmostSidebar.getAttribute('data-id')) || 0;
+    var id = parseInt(topmostSidebar.getAttribute("data-id")) || 0;
 
-    Dispatcher.publish('sidebar:controlbtn', { sidebar: id });
-    Dispatcher.publish('sidebar:keychange', id);
+    Dispatcher.publish("sidebar:controlbtn", { sidebar: id });
+    Dispatcher.publish("sidebar:keychange", id);
 
     for (var i = siblingLis.length - 1; i >= 0; i--) {
       var li = siblingLis[i];
-      if (li && typeof li.close === 'function') li.close();
-    };
+      if (li && typeof li.close === "function") li.close();
+    }
 
     for (var i = 0; i < topmostSiblingLis.length; i++) {
       var li = topmostSiblingLis[i];
-      if (li && typeof li.close === 'function') li.close();
+      if (li && typeof li.close === "function") li.close();
     }
 
     try {
       var height = node.getClientRects()[0].height;
       var top = node.getClientRects()[0].top;
       setTimeout(() => {
-        Dispatcher.publish('sidebar:reposition', node, top, height);
+        Dispatcher.publish("sidebar:reposition", node, top, height);
 
         if (isTouchDevice()) {
-          Dispatcher.publish('sidebar:closeSidebar');
+          Dispatcher.publish("sidebar:closeSidebar");
         }
       }, 300);
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   handleSearch(text, id) {
-    var links = this._node.getElementsByTagName('a');
+    var links = this._node.getElementsByTagName("a");
     var link = links[0];
 
     if (id === this.props.SidebarNavID) {
       if (!this.props.hidden && links.length === 1) {
         if (link.innerText.toLowerCase().search(text.toLowerCase()) === -1) {
-          this._node.style.display = 'none';
+          this._node.style.display = "none";
         } else {
-          this._node.style.display = 'block';
+          this._node.style.display = "block";
         }
       } else if (links.length > 1) {
-        if (this._node.innerText.toLowerCase().search(text.toLowerCase()) === -1) {
-          this._node.style.display = 'none';
+        if (
+          this._node.innerText.toLowerCase().search(text.toLowerCase()) === -1
+        ) {
+          this._node.style.display = "none";
         } else {
-          this._node.style.display = 'block';
+          this._node.style.display = "block";
         }
       }
     }
   }
 
-
   closeNav() {
     this.closeSidebarNav();
   }
 
-  handleClick = (e) => {
+  handleClick = e => {
     if (!this.props.href) {
       e.preventDefault();
       e.stopPropagation();
       this.toggleSidebarNav();
     }
-    if (this.props.hasOwnProperty('onClick')) {
+    if (this.props.hasOwnProperty("onClick")) {
       this.props.onClick();
     }
 
@@ -678,7 +730,8 @@ export class SidebarNavItem extends React.Component {
   };
 
   activateSidebar() {
-    var found = false, route;
+    var found = false,
+      route;
     for (var i = 0; i < this.routes.length; i++) {
       var r = this.routes[i];
       if (routesStore[r]) {
@@ -721,11 +774,24 @@ export class SidebarNavItem extends React.Component {
   }
 
   componentDidMount() {
-    this.activateHandler = Dispatcher.subscribe('sidebar:activate', :: this.activateSidebar);
-    this.closeHandler = Dispatcher.subscribe('sidebar:close', :: this.closeSidebarRoot);
-    this.searchHandler = Dispatcher.subscribe('sidebar:search', :: this.handleSearch);
+    this.activateHandler = Dispatcher.subscribe(
+      "sidebar:activate",
+      ::this.activateSidebar
+    );
+    this.closeHandler = Dispatcher.subscribe(
+      "sidebar:close",
+      ::this.closeSidebarRoot
+    );
+    this.searchHandler = Dispatcher.subscribe(
+      "sidebar:search",
+      ::this.handleSearch
+    );
 
-    if (this.props.hasOwnProperty('href') && this.props.href.length && this.props.href !== '#') {
+    if (
+      this.props.hasOwnProperty("href") &&
+      this.props.href.length &&
+      this.props.href !== "#"
+    ) {
       routesStore[this.props.href] = this.state.active;
 
       this.routes.push(this.props.href);
@@ -740,64 +806,75 @@ export class SidebarNavItem extends React.Component {
     }
 
     var node = ReactDOM.findDOMNode(this._node);
-    node.close = :: this.closeNav;
+    node.close = ::this.closeNav;
 
     enableStateForPathname(
-      this.props.router.location.pathname,
-      this.props.router.params
+      this.props.location.pathname,
+      this.props.match.params
     );
   }
 
   render() {
     var classes = classNames({
-      'open': this.state.open,
-      'active': this.state.active,
-      'sidebar-nav-item': true,
+      open: this.state.open,
+      active: this.state.active,
+      "sidebar-nav-item": true
     });
     var toggleClasses = classNames({
-      'toggle-button': true,
-      'open': this.state.toggleOpen,
-      'opposite': this.state.opposite
+      "toggle-button": true,
+      open: this.state.toggleOpen,
+      opposite: this.state.opposite
     });
-    var icon = null, toggleButton = null;
+    var icon = null,
+      toggleButton = null;
     if (this.props.children) {
-      toggleButton = <Icon className={toggleClasses.trim()} bundle='fontello' glyph={this.state.dir + '-open-3'} />;
+      toggleButton = (
+        <Icon
+          className={toggleClasses.trim()}
+          bundle="fontello"
+          glyph={this.state.dir + "-open-3"}
+        />
+      );
     }
     if (this.props.glyph || this.props.bundle) {
       icon = <Icon bundle={this.props.bundle} glyph={this.props.glyph} />;
     }
-    var style = { height: this.props.autoHeight ? 'auto' : this.state.height };
+    var style = { height: this.props.autoHeight ? "auto" : this.state.height };
 
     var props = {
       name: null,
       style: style,
-      tabIndex: '-1',
+      tabIndex: "-1",
       className: classes.trim()
     };
 
-    var RouteLink = 'a';
+    var RouteLink = "a";
     var componentProps = {
       name: null,
       tabIndex: -1,
-      href: this.props.href || '',
+      href: this.props.href || "",
       onClick: this.handleClick,
       style: { height: 45 }
     };
 
-    var pointerEvents = 'all';
-    if (this.props.hasOwnProperty('href') && this.props.href.length && this.props.href !== '#') {
+    var pointerEvents = "all";
+    if (
+      this.props.hasOwnProperty("href") &&
+      this.props.href.length &&
+      this.props.href !== "#"
+    ) {
       RouteLink = Link;
       componentProps.to = this.props.href;
       delete componentProps.href;
 
       if (this.props.href.search(":") !== -1) {
-        pointerEvents = 'none';
+        pointerEvents = "none";
       }
     }
 
     var isRoot = this.props.sidebarNavItem ? false : true;
 
-    var children = React.Children.map(this.props.children, (el) => {
+    var children = React.Children.map(this.props.children, el => {
       return React.cloneElement(el, {
         sidebarNavItem: this,
         SidebarNavID: this.props.SidebarNavID,
@@ -806,37 +883,55 @@ export class SidebarNavItem extends React.Component {
     });
 
     return (
-      <Motion style={{ height: spring(this.state.height, { stiffness: 300, damping: 20, precision: 0.0001 }) }}>
-        {(style) =>
-          <li ref={(c) => this._node = c} {...props} style={{ display: this.props.hidden ? 'none' : 'block', pointerEvents: pointerEvents, ...style }}>
+      <Motion
+        style={{
+          height: spring(this.state.height, {
+            stiffness: 300,
+            damping: 20,
+            precision: 0.0001
+          })
+        }}
+      >
+        {style => (
+          <li
+            ref={c => (this._node = c)}
+            {...props}
+            style={{
+              display: this.props.hidden ? "none" : "block",
+              pointerEvents: pointerEvents,
+              ...style
+            }}
+          >
             <RouteLink {...componentProps}>
               {icon}
-              <span className='name'>{this.props.name}</span>
+              <span className="name">{this.props.name}</span>
               {toggleButton}
             </RouteLink>
             {children}
           </li>
-        }
+        )}
       </Motion>
     );
   }
 }
 
 export class SidebarControls extends React.Component {
-  static belongsTo = 'Sidebar';
+  static belongsTo = "Sidebar";
 
   render() {
-    var classes = classNames('sidebar-controls-container',
-      this.props.className);
+    var classes = classNames(
+      "sidebar-controls-container",
+      this.props.className
+    );
     var props = {
-      dir: 'ltr',
+      dir: "ltr",
       ...this.props,
       className: classes
     };
 
     return (
       <div {...props} children={null}>
-        <ul className='sidebar-controls' tabIndex='-1'>
+        <ul className="sidebar-controls" tabIndex="-1">
           {this.props.children}
         </ul>
       </div>
@@ -845,7 +940,7 @@ export class SidebarControls extends React.Component {
 }
 
 export class SidebarControlBtn extends React.Component {
-  static belongsTo = 'Sidebar';
+  static belongsTo = "Sidebar";
 
   constructor(props) {
     super(props);
@@ -857,18 +952,18 @@ export class SidebarControlBtn extends React.Component {
     this.controlbtnHandler = null;
   }
 
-  handleClick = (e) => {
+  handleClick = e => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
 
-    Dispatcher.publish('sidebar:controlbtn', this.props);
-    Dispatcher.publish('sidebar:keychange', this.props.sidebar);
+    Dispatcher.publish("sidebar:controlbtn", this.props);
+    Dispatcher.publish("sidebar:keychange", this.props.sidebar);
   };
 
   handleState(props) {
-    if (props.hasOwnProperty('sidebar')) {
+    if (props.hasOwnProperty("sidebar")) {
       if (props.sidebar === this.props.sidebar) {
         this.setState({ active: true });
       } else {
@@ -882,16 +977,23 @@ export class SidebarControlBtn extends React.Component {
   }
 
   componentDidMount() {
-    this.controlbtnHandler = Dispatcher.subscribe('sidebar:controlbtn', :: this.handleState);
+    this.controlbtnHandler = Dispatcher.subscribe(
+      "sidebar:controlbtn",
+      ::this.handleState
+    );
   }
 
   render() {
-    var classes = classNames('sidebar-control-btn', {
-      'active': this.state.active
-    }, this.props.className);
+    var classes = classNames(
+      "sidebar-control-btn",
+      {
+        active: this.state.active
+      },
+      this.props.className
+    );
 
     var props = {
-      tabIndex: '-1',
+      tabIndex: "-1",
       onClick: this.handleClick,
       ...this.props,
       className: classes.trim()
@@ -903,7 +1005,7 @@ export class SidebarControlBtn extends React.Component {
 
     return (
       <li {...props}>
-        <a href='#' tabIndex='-1'>
+        <a href="#" tabIndex="-1">
           <Icon bundle={this.props.bundle} glyph={this.props.glyph} />
         </a>
       </li>
@@ -912,30 +1014,33 @@ export class SidebarControlBtn extends React.Component {
 }
 
 export class SidebarBtn extends React.Component {
-  static belongsTo = 'Sidebar';
+  static belongsTo = "Sidebar";
 
   handleSidebarStateChange = () => {
     let { visible } = this.props;
 
     if (!visible) {
-      Dispatcher.publish('sidebar');
+      Dispatcher.publish("sidebar");
       return;
     }
 
     if (isBrowser()) {
-      if (window.hasOwnProperty('Rubix')) {
+      if (window.hasOwnProperty("Rubix")) {
         Rubix.redraw();
       }
     }
 
-    Dispatcher.publish('sidebar:toggleSidebar');
+    Dispatcher.publish("sidebar:toggleSidebar");
   };
 
   render() {
-    var classes = classNames({
-      'pull-left': true,
-      'visible-xs-inline-block': !this.props.visible
-    }, this.props.className);
+    var classes = classNames(
+      {
+        "pull-left": true,
+        "visible-xs-inline-block": !this.props.visible
+      },
+      this.props.className
+    );
 
     var props = {
       ...this.props,
@@ -946,8 +1051,8 @@ export class SidebarBtn extends React.Component {
 
     return (
       <Nav {...props} onSelect={this.handleSidebarStateChange}>
-        <NavItem data-id='sidebar-btn' className='sidebar-btn' href='/'>
-          <Icon bundle='fontello' glyph='th-list-5' />
+        <NavItem data-id="sidebar-btn" className="sidebar-btn" href="/">
+          <Icon bundle="fontello" glyph="th-list-5" />
         </NavItem>
       </Nav>
     );
@@ -955,25 +1060,27 @@ export class SidebarBtn extends React.Component {
 }
 
 export class SidebarDivider extends React.Component {
-  static belongsTo = 'Sidebar';
+  static belongsTo = "Sidebar";
 
   static propTypes = {
-    color: PropTypes.string,
+    color: PropTypes.string
   };
 
   static defaultProps = {
-    color: '#3B4648',
+    color: "#3B4648"
   };
 
   render() {
     return (
-      <hr style={{
-        borderColor: this.props.color,
-        borderWidth: 2,
-        marginTop: 15,
-        marginBottom: 0,
-        width: 200
-      }} />
+      <hr
+        style={{
+          borderColor: this.props.color,
+          borderWidth: 2,
+          marginTop: 15,
+          marginBottom: 0,
+          width: 200
+        }}
+      />
     );
   }
 }
