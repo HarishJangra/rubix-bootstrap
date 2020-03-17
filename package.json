@@ -1,6 +1,6 @@
 {
   "name": "@harishjangra/rubix",
-  "version": "4.0.1",
+  "version": "2.9.99",
   "description": "Schoollog Bootstrap",
   "homepage": "https://schoollog.in/",
   "author": "Harish Jangra <harish0212@yahoo.com>",
@@ -11,7 +11,7 @@
     "bootstrap"
   ],
   "license": "MIT",
-  "main": "dist/lib/index.js",
+  "main": "lib/index.js",
   "babel": {
     "presets": [
       "es2015-rollup",
