@@ -1,6 +1,6 @@
 {
   "name": "@harishjangra/rubix",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Schoollog Bootstrap",
   "homepage": "https://schoollog.in/",
   "author": "Harish Jangra <harish0212@yahoo.com>",
@@ -11,7 +11,7 @@
     "bootstrap"
   ],
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/lib/index.js",
   "babel": {
     "presets": [
       "es2015-rollup",
@@ -38,7 +38,6 @@
     "react-hot-loader": "^3.0.0-beta.2",
     "react-motion": "^0.4.4",
     "react-redux": "^4.4.5",
-    "react-router": "^3.2.6",
     "react-router-dom": "^5.1.2",
     "react-router-redux": "^4.0.8",
     "react-router-scroll": "^0.4.4",

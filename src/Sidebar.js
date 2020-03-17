@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { Link, withRouter } from "react-router-dom";
-import { matchPattern } from "react-router-dom/lib/PatternUtils";
+import { matchPattern } from "react-router/lib/PatternUtils";
 import classNames from "classnames";
 
 import { Motion, spring } from "react-motion";
