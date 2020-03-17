@@ -1,83 +1,83 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SidebarDivider = exports.SidebarBtn = exports.SidebarControlBtn = exports.SidebarControls = exports.SidebarNavItem = exports.SidebarNav = exports.Sidebar = undefined;
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _extends2 = require("babel-runtime/helpers/extends");
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _getPrototypeOf = require("babel-runtime/core-js/object/get-prototype-of");
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _possibleConstructorReturn2 = require("babel-runtime/helpers/possibleConstructorReturn");
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _createClass2 = require("babel-runtime/helpers/createClass");
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _inherits2 = require("babel-runtime/helpers/inherits");
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+var _toConsumableArray2 = require("babel-runtime/helpers/toConsumableArray");
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
 var _class, _temp, _class2, _temp2, _class3, _class4, _temp3, _class5, _temp4, _class6, _temp5, _class7, _temp7, _class8, _temp8;
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactDom = require('react-dom');
+var _reactDom = require("react-dom");
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouter = require('react-router');
+var _reactRouterDom = require("react-router-dom");
 
-var _PatternUtils = require('react-router/lib/PatternUtils');
+var _PatternUtils = require("react-router/lib/PatternUtils");
 
-var _classnames = require('classnames');
+var _classnames = require("classnames");
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _reactMotion = require('react-motion');
+var _reactMotion = require("react-motion");
 
-var _Icon = require('./Icon');
+var _Icon = require("./Icon");
 
 var _Icon2 = _interopRequireDefault(_Icon);
 
-var _Dispatcher = require('./Dispatcher');
+var _Dispatcher = require("./Dispatcher");
 
 var _Dispatcher2 = _interopRequireDefault(_Dispatcher);
 
-var _isBrowser = require('./isBrowser');
+var _isBrowser = require("./isBrowser");
 
 var _isBrowser2 = _interopRequireDefault(_isBrowser);
 
-var _isTouchDevice = require('./isTouchDevice');
+var _isTouchDevice = require("./isTouchDevice");
 
 var _isTouchDevice2 = _interopRequireDefault(_isTouchDevice);
 
-var _Nav = require('./Nav');
+var _Nav = require("./Nav");
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = require('./NavItem');
+var _NavItem = require("./NavItem");
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
@@ -112,7 +112,7 @@ function matchRoute(pattern, pathname, params) {
     paramNames = [].concat((0, _toConsumableArray3.default)(paramNames), (0, _toConsumableArray3.default)(matched.paramNames));
     paramValues = [].concat((0, _toConsumableArray3.default)(paramValues), (0, _toConsumableArray3.default)(matched.paramValues));
 
-    if (remainingPathname === '') {
+    if (remainingPathname === "") {
       // We have an exact match on the route. Just check that all the params
       // match.
       // FIXME: This doesn't work on repeated params.
@@ -127,7 +127,7 @@ function matchRoute(pattern, pathname, params) {
 
 function matchRoutes(routes, pathname, params) {
   var matched = false,
-      patternMatched = '';
+      patternMatched = "";
   for (var i = 0; i < routes.length; i++) {
     if (matchRoute(routes[i], pathname, params)) {
       if (matched == true) {
@@ -149,13 +149,13 @@ function matchRoutes(routes, pathname, params) {
 }
 
 function getOpenState() {
-  return !(0, _isTouchDevice2.default)() ? localStorage.getItem('sidebar-open-state') === 'true' ? true : false : false;
+  return !(0, _isTouchDevice2.default)() ? localStorage.getItem("sidebar-open-state") === "true" ? true : false : false;
 }
 
 var MainContainer = function (_React$Component) {
   (0, _inherits3.default)(MainContainer, _React$Component);
   (0, _createClass3.default)(MainContainer, [{
-    key: 'getInitialState',
+    key: "getInitialState",
     value: function getInitialState() {
       return {
         open: true,
@@ -174,12 +174,12 @@ var MainContainer = function (_React$Component) {
   }
 
   (0, _createClass3.default)(MainContainer, [{
-    key: 'isOpen',
+    key: "isOpen",
     value: function isOpen(open) {
       return this.state.open === open;
     }
   }, {
-    key: 'closeSidebar',
+    key: "closeSidebar",
     value: function closeSidebar() {
       var forceClose = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
@@ -187,10 +187,10 @@ var MainContainer = function (_React$Component) {
         open: false,
         forceClose: forceClose
       });
-      localStorage.setItem('sidebar-open-state', false);
+      localStorage.setItem("sidebar-open-state", false);
     }
   }, {
-    key: 'openSidebar',
+    key: "openSidebar",
     value: function openSidebar() {
       var forceClose = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
@@ -198,10 +198,10 @@ var MainContainer = function (_React$Component) {
         open: true,
         forceClose: forceClose
       });
-      localStorage.setItem('sidebar-open-state', true);
+      localStorage.setItem("sidebar-open-state", true);
     }
   }, {
-    key: 'toggleSidebar',
+    key: "toggleSidebar",
     value: function toggleSidebar() {
       if (this.state.forceClose) {
         this.openSidebar(false);
@@ -210,7 +210,7 @@ var MainContainer = function (_React$Component) {
       }
     }
   }, {
-    key: 'sidebarStateChangeCallback',
+    key: "sidebarStateChangeCallback",
     value: function sidebarStateChangeCallback(open) {
       var openState = getOpenState();
       if (this.isOpen(open)) return;
@@ -222,18 +222,18 @@ var MainContainer = function (_React$Component) {
       this.setState({
         open: openState // toggle sidebar
       });
-      localStorage.setItem('sidebar-open-state', openState);
+      localStorage.setItem("sidebar-open-state", openState);
     }
   }, {
-    key: 'enablePath',
+    key: "enablePath",
     value: function enablePath(props) {
       if (props) {
-        enableStateForPathname(props.location.pathname, props.params);
+        enableStateForPathname(props.location.pathname, props.match.params);
       }
-      _Dispatcher2.default.publish('sidebar:activate');
+      _Dispatcher2.default.publish("sidebar:activate");
     }
   }, {
-    key: 'componentWillReceiveProps',
+    key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       var _this2 = this;
 
@@ -243,12 +243,12 @@ var MainContainer = function (_React$Component) {
       // this.enablePath();
     }
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
       _Dispatcher2.default.unsubscribe(this.handler);
     }
   }, {
-    key: 'startSwipe',
+    key: "startSwipe",
     value: function startSwipe(e) {
       if (e.changedTouches.length) {
         var touches = e.changedTouches[0];
@@ -256,69 +256,69 @@ var MainContainer = function (_React$Component) {
       }
     }
   }, {
-    key: 'swiping',
+    key: "swiping",
     value: function swiping(e) {
       if (e.changedTouches.length) {
         var touches = e.changedTouches[0];
         var change = Math.abs(touches.pageX - this.startX);
         var hasSwiped = change > 25;
 
-        var body = document.getElementById('body');
-        var sidebar = document.getElementById('sidebar');
-        var header = document.getElementById('rubix-nav-header');
+        var body = document.getElementById("body");
+        var sidebar = document.getElementById("sidebar");
+        var header = document.getElementById("rubix-nav-header");
         if (hasSwiped) {
           if (!this.state.open) {
             if (change > 250) return;
-            body.style.marginLeft = change + 'px';
-            body.style.marginRight = -change + 'px';
-            sidebar.style.left = -250 + change + 'px';
-            header.style.marginLeft = change + 'px';
-            header.style.marginRight = -change + 'px';
+            body.style.marginLeft = change + "px";
+            body.style.marginRight = -change + "px";
+            sidebar.style.left = -250 + change + "px";
+            header.style.marginLeft = change + "px";
+            header.style.marginRight = -change + "px";
           } else {
             if (250 - change < 0) return;
-            body.style.marginLeft = 250 - change + 'px';
-            body.style.marginRight = -(250 - change) + 'px';
-            sidebar.style.left = 0 - (250 - change) + 'px';
-            header.style.marginLeft = 250 - change + 'px';
-            header.style.marginRight = -(250 - change) + 'px';
+            body.style.marginLeft = 250 - change + "px";
+            body.style.marginRight = -(250 - change) + "px";
+            sidebar.style.left = 0 - (250 - change) + "px";
+            header.style.marginLeft = 250 - change + "px";
+            header.style.marginRight = -(250 - change) + "px";
           }
         }
       }
     }
   }, {
-    key: 'cancelSwipe',
+    key: "cancelSwipe",
     value: function cancelSwipe(e) {
       this.startX = 0;
-      var body = document.getElementById('body');
-      var sidebar = document.getElementById('sidebar');
-      var header = document.getElementById('rubix-nav-header');
-      body.style.marginLeft = '';
-      body.style.marginRight = '';
-      sidebar.style.left = '';
-      header.style.marginLeft = '';
-      header.style.marginRight = '';
+      var body = document.getElementById("body");
+      var sidebar = document.getElementById("sidebar");
+      var header = document.getElementById("rubix-nav-header");
+      body.style.marginLeft = "";
+      body.style.marginRight = "";
+      sidebar.style.left = "";
+      header.style.marginLeft = "";
+      header.style.marginRight = "";
       this.setState({
         open: false
       });
     }
   }, {
-    key: 'endSwipe',
+    key: "endSwipe",
     value: function endSwipe(e) {
       if (e.changedTouches.length) {
         var touches = e.changedTouches[0];
         var change = touches.pageX - this.startX;
         var hasSwiped = Math.abs(change) > 25;
 
-        var body = document.getElementById('body');
-        var sidebar = document.getElementById('sidebar');
-        var header = document.getElementById('rubix-nav-header');
+        var body = document.getElementById("body");
+        var sidebar = document.getElementById("sidebar");
+        var header = document.getElementById("rubix-nav-header");
 
         if (hasSwiped) {
-          body.style.marginLeft = '';
-          body.style.marginRight = '';
-          sidebar.style.left = '';
-          header.style.marginLeft = '';
-          header.style.marginRight = '';
+          body.style.marginLeft = "";
+          body.style.marginRight = "";
+          sidebar.style.left = "";
+          header.style.marginLeft = "";
+          header.style.marginRight = "";
 
           if (!this.state.open) {
             this.setState({
@@ -333,18 +333,18 @@ var MainContainer = function (_React$Component) {
       }
     }
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
       _Dispatcher2.default.unsubscribe(this.sidebarStateChangeCallback);
       _Dispatcher2.default.unsubscribe(this.closeSidebar);
       _Dispatcher2.default.unsubscribe(this.toggleSidebar);
     }
   }, {
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
-      this.handler = _Dispatcher2.default.subscribe('sidebar', this.sidebarStateChangeCallback);
-      this.closeHandler = _Dispatcher2.default.subscribe('sidebar:closeSidebar', this.closeSidebar);
-      this.closeHandler = _Dispatcher2.default.subscribe('sidebar:toggleSidebar', this.toggleSidebar);
+      this.handler = _Dispatcher2.default.subscribe("sidebar", this.sidebarStateChangeCallback);
+      this.closeHandler = _Dispatcher2.default.subscribe("sidebar:closeSidebar", this.closeSidebar);
+      this.closeHandler = _Dispatcher2.default.subscribe("sidebar:toggleSidebar", this.toggleSidebar);
 
       var openState = getOpenState();
       this.setState({
@@ -354,16 +354,16 @@ var MainContainer = function (_React$Component) {
       this.enablePath();
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var classes = (0, _classnames2.default)({
-        'container-open': this.state.open,
-        'force-close': this.state.forceClose
+        "container-open": this.state.open,
+        "force-close": this.state.forceClose
       });
 
       return _react2.default.createElement(
-        'div',
-        { id: 'container', className: classes },
+        "div",
+        { id: "container", className: classes },
         this.props.children
       );
     }
@@ -383,8 +383,8 @@ var Sidebar = exports.Sidebar = (_temp = _class = function (_React$Component2) {
     _this3.timer = null;
 
     _this3.state = {
-      left: props.sidebar * 100 + '%',
-      visibility: props.sidebar === 0 ? 'visible' : 'hidden'
+      left: props.sidebar * 100 + "%",
+      visibility: props.sidebar === 0 ? "visible" : "hidden"
     };
 
     _this3.reinitializeScrollbarHandler = null;
@@ -396,7 +396,7 @@ var Sidebar = exports.Sidebar = (_temp = _class = function (_React$Component2) {
   }
 
   (0, _createClass3.default)(Sidebar, [{
-    key: 'repositionScrollbar',
+    key: "repositionScrollbar",
     value: function repositionScrollbar(child_node, top, height) {
       var node = _reactDom2.default.findDOMNode(this.refs.sidebar);
       var scrollTo = top - node.getBoundingClientRect().top + node.scrollTop;
@@ -417,7 +417,7 @@ var Sidebar = exports.Sidebar = (_temp = _class = function (_React$Component2) {
       }
     }
   }, {
-    key: 'updateScrollbar',
+    key: "updateScrollbar",
     value: function updateScrollbar() {
       if (!(0, _isTouchDevice2.default)()) {
         if ((0, _isBrowser2.default)()) {
@@ -428,7 +428,7 @@ var Sidebar = exports.Sidebar = (_temp = _class = function (_React$Component2) {
       }
     }
   }, {
-    key: 'initializeScrollbar',
+    key: "initializeScrollbar",
     value: function initializeScrollbar() {
       if ((0, _isBrowser2.default)() && !(0, _isTouchDevice2.default)()) {
         if (window.Ps) {
@@ -439,7 +439,7 @@ var Sidebar = exports.Sidebar = (_temp = _class = function (_React$Component2) {
       }
     }
   }, {
-    key: 'destroyScrollbar',
+    key: "destroyScrollbar",
     value: function destroyScrollbar() {
       if ((0, _isBrowser2.default)() && !(0, _isTouchDevice2.default)()) {
         if (window.Ps) {
@@ -448,16 +448,16 @@ var Sidebar = exports.Sidebar = (_temp = _class = function (_React$Component2) {
       }
     }
   }, {
-    key: 'handleKeyChange',
+    key: "handleKeyChange",
     value: function handleKeyChange(sidebar) {
-      var newLeft = this.props.sidebar * 100 - sidebar * 100 + '%';
+      var newLeft = this.props.sidebar * 100 - sidebar * 100 + "%";
       this.setState({
         left: newLeft,
-        visibility: 'visible'
+        visibility: "visible"
       });
     }
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
       _Dispatcher2.default.unsubscribe(this.reinitializeScrollbarHandler);
       _Dispatcher2.default.unsubscribe(this.destroyScrollbarHandler);
@@ -466,53 +466,58 @@ var Sidebar = exports.Sidebar = (_temp = _class = function (_React$Component2) {
       _Dispatcher2.default.unsubscribe(this.updateHandler);
     }
   }, {
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       this.initializeScrollbar();
 
-      this.reinitializeScrollbarHandler = _Dispatcher2.default.subscribe('sidebar:reinitialize', this.initializeScrollbar.bind(this));
-      this.destroyScrollbarHandler = _Dispatcher2.default.subscribe('sidebar:destroy', this.destroyScrollbar.bind(this));
-      this.repositionHandler = _Dispatcher2.default.subscribe('sidebar:reposition', this.repositionScrollbar.bind(this));
-      this.keychangeHandler = _Dispatcher2.default.subscribe('sidebar:keychange', this.handleKeyChange.bind(this));
-      this.updateHandler = _Dispatcher2.default.subscribe('sidebar:update', this.updateScrollbar.bind(this));
+      this.reinitializeScrollbarHandler = _Dispatcher2.default.subscribe("sidebar:reinitialize", this.initializeScrollbar.bind(this));
+      this.destroyScrollbarHandler = _Dispatcher2.default.subscribe("sidebar:destroy", this.destroyScrollbar.bind(this));
+      this.repositionHandler = _Dispatcher2.default.subscribe("sidebar:reposition", this.repositionScrollbar.bind(this));
+      this.keychangeHandler = _Dispatcher2.default.subscribe("sidebar:keychange", this.handleKeyChange.bind(this));
+      this.updateHandler = _Dispatcher2.default.subscribe("sidebar:update", this.updateScrollbar.bind(this));
 
       if (this.props.active) {
-        _Dispatcher2.default.publish('sidebar:controlbtn', this.props);
-        _Dispatcher2.default.publish('sidebar:keychange', this.props.sidebar);
+        _Dispatcher2.default.publish("sidebar:controlbtn", this.props);
+        _Dispatcher2.default.publish("sidebar:keychange", this.props.sidebar);
       }
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var props = (0, _extends3.default)({
         style: {
           left: this.state.left,
           visibility: this.state.visibility,
-          transition: 'all 0.3s ease',
-          OTransition: 'all 0.3s ease',
-          MsTransition: 'all 0.3s ease',
-          MozTransition: 'all 0.3s ease',
-          WebkitTransition: 'all 0.3s ease'
+          transition: "all 0.3s ease",
+          OTransition: "all 0.3s ease",
+          MsTransition: "all 0.3s ease",
+          MozTransition: "all 0.3s ease",
+          WebkitTransition: "all 0.3s ease"
         }
       }, this.props, {
-        className: (0, _classnames2.default)('sidebar', 'sidebar__main', this.props.className)
+        className: (0, _classnames2.default)("sidebar", "sidebar__main", this.props.className)
       });
 
       delete props.sidebar;
 
       return _react2.default.createElement(
-        'div',
-        (0, _extends3.default)({ ref: 'sidebar' }, props, { children: null, 'data-id': this.props.sidebar }),
+        "div",
+        (0, _extends3.default)({
+          ref: "sidebar"
+        }, props, {
+          children: null,
+          "data-id": this.props.sidebar
+        }),
         _react2.default.createElement(
-          'div',
-          { ref: 'innersidebar' },
+          "div",
+          { ref: "innersidebar" },
           this.props.children
         )
       );
     }
   }]);
   return Sidebar;
-}(_react2.default.Component), _class.belongsTo = 'Sidebar', _temp);
+}(_react2.default.Component), _class.belongsTo = "Sidebar", _temp);
 var SidebarNav = exports.SidebarNav = (_temp2 = _class2 = function (_React$Component3) {
   (0, _inherits3.default)(SidebarNav, _React$Component3);
 
@@ -526,26 +531,26 @@ var SidebarNav = exports.SidebarNav = (_temp2 = _class2 = function (_React$Compo
   }
 
   (0, _createClass3.default)(SidebarNav, [{
-    key: 'getID',
+    key: "getID",
     value: function getID() {
       return this.id;
     }
   }, {
-    key: 'getHeight',
+    key: "getHeight",
     value: function getHeight() {
       return _reactDom2.default.findDOMNode(this.refs.ul).getClientRects()[0].height;
     }
   }, {
-    key: 'search',
+    key: "search",
     value: function search(text) {
-      _Dispatcher2.default.publish('sidebar:search', text, this.getID());
+      _Dispatcher2.default.publish("sidebar:search", text, this.getID());
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this5 = this;
 
-      var classes = (0, _classnames2.default)('sidebar-nav', this.props.className);
+      var classes = (0, _classnames2.default)("sidebar-nav", this.props.className);
 
       if (this.props.sidebarNavItem) {
         this.props.sidebarNavItem.childSidebarNav = this;
@@ -574,16 +579,16 @@ var SidebarNav = exports.SidebarNav = (_temp2 = _class2 = function (_React$Compo
       delete props.rootSidebarNavItem;
 
       return _react2.default.createElement(
-        'ul',
-        (0, _extends3.default)({ ref: 'ul' }, props),
+        "ul",
+        (0, _extends3.default)({ ref: "ul" }, props),
         children
       );
     }
   }]);
   return SidebarNav;
-}(_react2.default.Component), _class2.belongsTo = 'Sidebar', _class2.id = 0, _temp2);
+}(_react2.default.Component), _class2.belongsTo = "Sidebar", _class2.id = 0, _temp2);
 
-var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_class3 = (_temp3 = _class4 = function (_React$Component4) {
+var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouterDom.withRouter)(_class3 = (_temp3 = _class4 = function (_React$Component4) {
   (0, _inherits3.default)(SidebarNavItem, _React$Component4);
 
   function SidebarNavItem(props) {
@@ -597,7 +602,7 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
         e.stopPropagation();
         _this6.toggleSidebarNav();
       }
-      if (_this6.props.hasOwnProperty('onClick')) {
+      if (_this6.props.hasOwnProperty("onClick")) {
         _this6.props.onClick();
       }
 
@@ -608,7 +613,7 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
       open: props.open || false,
       active: props.active || false,
       toggleOpen: props.open || false,
-      dir: 'left',
+      dir: "left",
       opposite: false,
       height: 45
     };
@@ -622,15 +627,15 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
   }
 
   (0, _createClass3.default)(SidebarNavItem, [{
-    key: 'handleLayoutDirChange',
+    key: "handleLayoutDirChange",
     value: function handleLayoutDirChange(dir) {
       this.setState({
-        dir: dir === 'ltr' ? 'left' : 'right',
-        opposite: dir === 'ltr' ? false : true
+        dir: dir === "ltr" ? "left" : "right",
+        opposite: dir === "ltr" ? false : true
       });
     }
   }, {
-    key: 'getTotalHeight',
+    key: "getTotalHeight",
     value: function getTotalHeight() {
       if (this.childSidebarNav) {
         return this.childSidebarNav.getHeight() + 45;
@@ -639,7 +644,7 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
       }
     }
   }, {
-    key: 'openSidebarNav',
+    key: "openSidebarNav",
     value: function openSidebarNav(fullOpen, height, isClosing) {
       var _this7 = this;
 
@@ -655,7 +660,7 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
           open: true,
           toggleOpen: true
         }, function () {
-          _Dispatcher2.default.publish('sidebar:update');
+          _Dispatcher2.default.publish("sidebar:update");
           if (_this7.props.sidebarNavItem) {
             if (isClosing) {
               _this7.props.sidebarNavItem.openSidebarNav(false, 45 - totalHeight, true);
@@ -671,7 +676,7 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
       }
     }
   }, {
-    key: 'closeSidebarNav',
+    key: "closeSidebarNav",
     value: function closeSidebarNav(collapseRoot) {
       var _this8 = this;
 
@@ -684,7 +689,7 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
           open: false,
           toggleOpen: false
         }, function () {
-          _Dispatcher2.default.publish('sidebar:update');
+          _Dispatcher2.default.publish("sidebar:update");
           if (_this8.props.sidebarNavItem) {
             _this8.props.sidebarNavItem.openSidebarNav(false, 45 - thisHeight, true);
           }
@@ -692,7 +697,7 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
       }
     }
   }, {
-    key: 'toggleSidebarNav',
+    key: "toggleSidebarNav",
     value: function toggleSidebarNav() {
       if (this.state.height === 45) {
         this.openSidebarNav();
@@ -701,11 +706,11 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
       }
     }
   }, {
-    key: 'getTopmostLi',
+    key: "getTopmostLi",
     value: function getTopmostLi(node, li, original_node) {
       if (!original_node) original_node = node;
       while (node.parentNode) {
-        if (node.parentNode.className.search('sidebar-nav-container') !== -1) {
+        if (node.parentNode.className.search("sidebar-nav-container") !== -1) {
           if (li) {
             return li;
           } else {
@@ -713,14 +718,14 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
           }
         }
 
-        if (node.parentNode.nodeName.toLowerCase() === 'li') {
+        if (node.parentNode.nodeName.toLowerCase() === "li") {
           li = node.parentNode;
         }
         node = node.parentNode;
       }
     }
   }, {
-    key: 'getSiblingsLi',
+    key: "getSiblingsLi",
     value: function getSiblingsLi(node) {
       var original_node = node;
       var sibilings = [];
@@ -737,19 +742,19 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
       return sibilings;
     }
   }, {
-    key: 'getSiblingsNav',
+    key: "getSiblingsNav",
     value: function getSiblingsNav(node) {
       var original_node = node;
       var siblings = [];
       while (node.nextSibling) {
-        if (node.nextSibling.className.search('sidebar-nav') !== -1) {
+        if (node.nextSibling.className.search("sidebar-nav") !== -1) {
           siblings.push(node.nextSibling);
         }
         node = node.nextSibling;
       }
       node = original_node;
       while (node.previousSibling) {
-        if (node.previousSibling.className.search('sidebar-nav') !== -1) {
+        if (node.previousSibling.className.search("sidebar-nav") !== -1) {
           siblings.push(node.previousSibling);
         }
         node = node.previousSibling;
@@ -758,17 +763,17 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
       return siblings;
     }
   }, {
-    key: 'getTopmostSidebar',
+    key: "getTopmostSidebar",
     value: function getTopmostSidebar(node) {
       while (node.parentNode) {
-        if (node.parentNode.className.search('sidebar__main') !== -1) {
+        if (node.parentNode.className.search("sidebar__main") !== -1) {
           return node.parentNode;
         }
         node = node.parentNode;
       }
     }
   }, {
-    key: 'checkAndClose',
+    key: "checkAndClose",
     value: function checkAndClose(props) {
       var node = _reactDom2.default.findDOMNode(this._node);
 
@@ -776,62 +781,62 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
       var topmostSiblingLis = this.getSiblingsLi(topmostLi);
       var siblingLis = this.getSiblingsLi(node);
       var topmostSidebar = this.getTopmostSidebar(node);
-      var id = parseInt(topmostSidebar.getAttribute('data-id')) || 0;
+      var id = parseInt(topmostSidebar.getAttribute("data-id")) || 0;
 
-      _Dispatcher2.default.publish('sidebar:controlbtn', { sidebar: id });
-      _Dispatcher2.default.publish('sidebar:keychange', id);
+      _Dispatcher2.default.publish("sidebar:controlbtn", { sidebar: id });
+      _Dispatcher2.default.publish("sidebar:keychange", id);
 
       for (var i = siblingLis.length - 1; i >= 0; i--) {
         var li = siblingLis[i];
-        if (li && typeof li.close === 'function') li.close();
-      };
+        if (li && typeof li.close === "function") li.close();
+      }
 
       for (var i = 0; i < topmostSiblingLis.length; i++) {
         var li = topmostSiblingLis[i];
-        if (li && typeof li.close === 'function') li.close();
+        if (li && typeof li.close === "function") li.close();
       }
 
       try {
         var height = node.getClientRects()[0].height;
         var top = node.getClientRects()[0].top;
         setTimeout(function () {
-          _Dispatcher2.default.publish('sidebar:reposition', node, top, height);
+          _Dispatcher2.default.publish("sidebar:reposition", node, top, height);
 
           if ((0, _isTouchDevice2.default)()) {
-            _Dispatcher2.default.publish('sidebar:closeSidebar');
+            _Dispatcher2.default.publish("sidebar:closeSidebar");
           }
         }, 300);
       } catch (e) {}
     }
   }, {
-    key: 'handleSearch',
+    key: "handleSearch",
     value: function handleSearch(text, id) {
-      var links = this._node.getElementsByTagName('a');
+      var links = this._node.getElementsByTagName("a");
       var link = links[0];
 
       if (id === this.props.SidebarNavID) {
         if (!this.props.hidden && links.length === 1) {
           if (link.innerText.toLowerCase().search(text.toLowerCase()) === -1) {
-            this._node.style.display = 'none';
+            this._node.style.display = "none";
           } else {
-            this._node.style.display = 'block';
+            this._node.style.display = "block";
           }
         } else if (links.length > 1) {
           if (this._node.innerText.toLowerCase().search(text.toLowerCase()) === -1) {
-            this._node.style.display = 'none';
+            this._node.style.display = "none";
           } else {
-            this._node.style.display = 'block';
+            this._node.style.display = "block";
           }
         }
       }
     }
   }, {
-    key: 'closeNav',
+    key: "closeNav",
     value: function closeNav() {
       this.closeSidebarNav();
     }
   }, {
-    key: 'activateSidebar',
+    key: "activateSidebar",
     value: function activateSidebar() {
       var found = false,
           route;
@@ -864,27 +869,27 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
       }
     }
   }, {
-    key: 'closeSidebarRoot',
+    key: "closeSidebarRoot",
     value: function closeSidebarRoot() {
       if (!this.props.sidebarNavItem) {
         this.closeSidebarNav();
       }
     }
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
       _Dispatcher2.default.unsubscribe(this.activateHandler);
       _Dispatcher2.default.unsubscribe(this.closeHandler);
       _Dispatcher2.default.unsubscribe(this.searchHandler);
     }
   }, {
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
-      this.activateHandler = _Dispatcher2.default.subscribe('sidebar:activate', this.activateSidebar.bind(this));
-      this.closeHandler = _Dispatcher2.default.subscribe('sidebar:close', this.closeSidebarRoot.bind(this));
-      this.searchHandler = _Dispatcher2.default.subscribe('sidebar:search', this.handleSearch.bind(this));
+      this.activateHandler = _Dispatcher2.default.subscribe("sidebar:activate", this.activateSidebar.bind(this));
+      this.closeHandler = _Dispatcher2.default.subscribe("sidebar:close", this.closeSidebarRoot.bind(this));
+      this.searchHandler = _Dispatcher2.default.subscribe("sidebar:search", this.handleSearch.bind(this));
 
-      if (this.props.hasOwnProperty('href') && this.props.href.length && this.props.href !== '#') {
+      if (this.props.hasOwnProperty("href") && this.props.href.length && this.props.href !== "#") {
         routesStore[this.props.href] = this.state.active;
 
         this.routes.push(this.props.href);
@@ -901,57 +906,61 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
       var node = _reactDom2.default.findDOMNode(this._node);
       node.close = this.closeNav.bind(this);
 
-      enableStateForPathname(this.props.router.location.pathname, this.props.router.params);
+      enableStateForPathname(this.props.location.pathname, this.props.match.params);
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this9 = this;
 
       var classes = (0, _classnames2.default)({
-        'open': this.state.open,
-        'active': this.state.active,
-        'sidebar-nav-item': true
+        open: this.state.open,
+        active: this.state.active,
+        "sidebar-nav-item": true
       });
       var toggleClasses = (0, _classnames2.default)({
-        'toggle-button': true,
-        'open': this.state.toggleOpen,
-        'opposite': this.state.opposite
+        "toggle-button": true,
+        open: this.state.toggleOpen,
+        opposite: this.state.opposite
       });
       var icon = null,
           toggleButton = null;
       if (this.props.children) {
-        toggleButton = _react2.default.createElement(_Icon2.default, { className: toggleClasses.trim(), bundle: 'fontello', glyph: this.state.dir + '-open-3' });
+        toggleButton = _react2.default.createElement(_Icon2.default, {
+          className: toggleClasses.trim(),
+          bundle: "fontello",
+          glyph: this.state.dir + "-open-3"
+        });
       }
       if (this.props.glyph || this.props.bundle) {
         icon = _react2.default.createElement(_Icon2.default, { bundle: this.props.bundle, glyph: this.props.glyph });
       }
-      var style = { height: this.props.autoHeight ? 'auto' : this.state.height };
+      var style = { height: this.props.autoHeight ? "auto" : this.state.height };
 
       var props = {
         name: null,
         style: style,
-        tabIndex: '-1',
+        tabIndex: "-1",
         className: classes.trim()
       };
 
-      var RouteLink = 'a';
+      var RouteLink = "a";
       var componentProps = {
         name: null,
         tabIndex: -1,
-        href: this.props.href || '',
+        href: this.props.href || "",
         onClick: this.handleClick,
         style: { height: 45 }
       };
 
-      var pointerEvents = 'all';
-      if (this.props.hasOwnProperty('href') && this.props.href.length && this.props.href !== '#') {
-        RouteLink = _reactRouter.Link;
+      var pointerEvents = "all";
+      if (this.props.hasOwnProperty("href") && this.props.href.length && this.props.href !== "#") {
+        RouteLink = _reactRouterDom.Link;
         componentProps.to = this.props.href;
         delete componentProps.href;
 
         if (this.props.href.search(":") !== -1) {
-          pointerEvents = 'none';
+          pointerEvents = "none";
         }
       }
 
@@ -967,20 +976,35 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
 
       return _react2.default.createElement(
         _reactMotion.Motion,
-        { style: { height: (0, _reactMotion.spring)(this.state.height, { stiffness: 300, damping: 20, precision: 0.0001 }) } },
+        {
+          style: {
+            height: (0, _reactMotion.spring)(this.state.height, {
+              stiffness: 300,
+              damping: 20,
+              precision: 0.0001
+            })
+          }
+        },
         function (style) {
           return _react2.default.createElement(
-            'li',
-            (0, _extends3.default)({ ref: function ref(c) {
+            "li",
+            (0, _extends3.default)({
+              ref: function ref(c) {
                 return _this9._node = c;
-              } }, props, { style: (0, _extends3.default)({ display: _this9.props.hidden ? 'none' : 'block', pointerEvents: pointerEvents }, style) }),
+              }
+            }, props, {
+              style: (0, _extends3.default)({
+                display: _this9.props.hidden ? "none" : "block",
+                pointerEvents: pointerEvents
+              }, style)
+            }),
             _react2.default.createElement(
               RouteLink,
               componentProps,
               icon,
               _react2.default.createElement(
-                'span',
-                { className: 'name' },
+                "span",
+                { className: "name" },
                 _this9.props.name
               ),
               toggleButton
@@ -992,7 +1016,7 @@ var SidebarNavItem = exports.SidebarNavItem = (0, _reactRouter.withRouter)(_clas
     }
   }]);
   return SidebarNavItem;
-}(_react2.default.Component), _class4.belongsTo = 'Sidebar', _temp3)) || _class3;
+}(_react2.default.Component), _class4.belongsTo = "Sidebar", _temp3)) || _class3;
 
 var SidebarControls = exports.SidebarControls = (_temp4 = _class5 = function (_React$Component5) {
   (0, _inherits3.default)(SidebarControls, _React$Component5);
@@ -1003,28 +1027,28 @@ var SidebarControls = exports.SidebarControls = (_temp4 = _class5 = function (_R
   }
 
   (0, _createClass3.default)(SidebarControls, [{
-    key: 'render',
+    key: "render",
     value: function render() {
-      var classes = (0, _classnames2.default)('sidebar-controls-container', this.props.className);
+      var classes = (0, _classnames2.default)("sidebar-controls-container", this.props.className);
       var props = (0, _extends3.default)({
-        dir: 'ltr'
+        dir: "ltr"
       }, this.props, {
         className: classes
       });
 
       return _react2.default.createElement(
-        'div',
+        "div",
         (0, _extends3.default)({}, props, { children: null }),
         _react2.default.createElement(
-          'ul',
-          { className: 'sidebar-controls', tabIndex: '-1' },
+          "ul",
+          { className: "sidebar-controls", tabIndex: "-1" },
           this.props.children
         )
       );
     }
   }]);
   return SidebarControls;
-}(_react2.default.Component), _class5.belongsTo = 'Sidebar', _temp4);
+}(_react2.default.Component), _class5.belongsTo = "Sidebar", _temp4);
 var SidebarControlBtn = exports.SidebarControlBtn = (_temp5 = _class6 = function (_React$Component6) {
   (0, _inherits3.default)(SidebarControlBtn, _React$Component6);
 
@@ -1039,8 +1063,8 @@ var SidebarControlBtn = exports.SidebarControlBtn = (_temp5 = _class6 = function
         e.stopPropagation();
       }
 
-      _Dispatcher2.default.publish('sidebar:controlbtn', _this11.props);
-      _Dispatcher2.default.publish('sidebar:keychange', _this11.props.sidebar);
+      _Dispatcher2.default.publish("sidebar:controlbtn", _this11.props);
+      _Dispatcher2.default.publish("sidebar:keychange", _this11.props.sidebar);
     };
 
     _this11.state = {
@@ -1052,9 +1076,9 @@ var SidebarControlBtn = exports.SidebarControlBtn = (_temp5 = _class6 = function
   }
 
   (0, _createClass3.default)(SidebarControlBtn, [{
-    key: 'handleState',
+    key: "handleState",
     value: function handleState(props) {
-      if (props.hasOwnProperty('sidebar')) {
+      if (props.hasOwnProperty("sidebar")) {
         if (props.sidebar === this.props.sidebar) {
           this.setState({ active: true });
         } else {
@@ -1063,24 +1087,24 @@ var SidebarControlBtn = exports.SidebarControlBtn = (_temp5 = _class6 = function
       }
     }
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
       _Dispatcher2.default.unsubscribe(this.controlbtnHandler);
     }
   }, {
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
-      this.controlbtnHandler = _Dispatcher2.default.subscribe('sidebar:controlbtn', this.handleState.bind(this));
+      this.controlbtnHandler = _Dispatcher2.default.subscribe("sidebar:controlbtn", this.handleState.bind(this));
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      var classes = (0, _classnames2.default)('sidebar-control-btn', {
-        'active': this.state.active
+      var classes = (0, _classnames2.default)("sidebar-control-btn", {
+        active: this.state.active
       }, this.props.className);
 
       var props = (0, _extends3.default)({
-        tabIndex: '-1',
+        tabIndex: "-1",
         onClick: this.handleClick
       }, this.props, {
         className: classes.trim()
@@ -1091,18 +1115,18 @@ var SidebarControlBtn = exports.SidebarControlBtn = (_temp5 = _class6 = function
       delete props.sidebar;
 
       return _react2.default.createElement(
-        'li',
+        "li",
         props,
         _react2.default.createElement(
-          'a',
-          { href: '#', tabIndex: '-1' },
+          "a",
+          { href: "#", tabIndex: "-1" },
           _react2.default.createElement(_Icon2.default, { bundle: this.props.bundle, glyph: this.props.glyph })
         )
       );
     }
   }]);
   return SidebarControlBtn;
-}(_react2.default.Component), _class6.belongsTo = 'Sidebar', _temp5);
+}(_react2.default.Component), _class6.belongsTo = "Sidebar", _temp5);
 var SidebarBtn = exports.SidebarBtn = (_temp7 = _class7 = function (_React$Component7) {
   (0, _inherits3.default)(SidebarBtn, _React$Component7);
 
@@ -1122,26 +1146,26 @@ var SidebarBtn = exports.SidebarBtn = (_temp7 = _class7 = function (_React$Compo
 
 
       if (!visible) {
-        _Dispatcher2.default.publish('sidebar');
+        _Dispatcher2.default.publish("sidebar");
         return;
       }
 
       if ((0, _isBrowser2.default)()) {
-        if (window.hasOwnProperty('Rubix')) {
+        if (window.hasOwnProperty("Rubix")) {
           Rubix.redraw();
         }
       }
 
-      _Dispatcher2.default.publish('sidebar:toggleSidebar');
+      _Dispatcher2.default.publish("sidebar:toggleSidebar");
     }, _temp6), (0, _possibleConstructorReturn3.default)(_this12, _ret);
   }
 
   (0, _createClass3.default)(SidebarBtn, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var classes = (0, _classnames2.default)({
-        'pull-left': true,
-        'visible-xs-inline-block': !this.props.visible
+        "pull-left": true,
+        "visible-xs-inline-block": !this.props.visible
       }, this.props.className);
 
       var props = (0, _extends3.default)({}, this.props, {
@@ -1155,14 +1179,14 @@ var SidebarBtn = exports.SidebarBtn = (_temp7 = _class7 = function (_React$Compo
         (0, _extends3.default)({}, props, { onSelect: this.handleSidebarStateChange }),
         _react2.default.createElement(
           _NavItem2.default,
-          { 'data-id': 'sidebar-btn', className: 'sidebar-btn', href: '/' },
-          _react2.default.createElement(_Icon2.default, { bundle: 'fontello', glyph: 'th-list-5' })
+          { "data-id": "sidebar-btn", className: "sidebar-btn", href: "/" },
+          _react2.default.createElement(_Icon2.default, { bundle: "fontello", glyph: "th-list-5" })
         )
       );
     }
   }]);
   return SidebarBtn;
-}(_react2.default.Component), _class7.belongsTo = 'Sidebar', _temp7);
+}(_react2.default.Component), _class7.belongsTo = "Sidebar", _temp7);
 var SidebarDivider = exports.SidebarDivider = (_temp8 = _class8 = function (_React$Component8) {
   (0, _inherits3.default)(SidebarDivider, _React$Component8);
 
@@ -1172,20 +1196,22 @@ var SidebarDivider = exports.SidebarDivider = (_temp8 = _class8 = function (_Rea
   }
 
   (0, _createClass3.default)(SidebarDivider, [{
-    key: 'render',
+    key: "render",
     value: function render() {
-      return _react2.default.createElement('hr', { style: {
+      return _react2.default.createElement("hr", {
+        style: {
           borderColor: this.props.color,
           borderWidth: 2,
           marginTop: 15,
           marginBottom: 0,
           width: 200
-        } });
+        }
+      });
     }
   }]);
   return SidebarDivider;
-}(_react2.default.Component), _class8.belongsTo = 'Sidebar', _class8.propTypes = {
+}(_react2.default.Component), _class8.belongsTo = "Sidebar", _class8.propTypes = {
   color: _propTypes2.default.string
 }, _class8.defaultProps = {
-  color: '#3B4648'
+  color: "#3B4648"
 }, _temp8);
