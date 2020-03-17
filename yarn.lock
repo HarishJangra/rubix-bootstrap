@@ -33,6 +33,34 @@
     prop-types "^15.7.2"
     redux-actions "^0.9.1"
 
+"@harishjangra/rubix@2.9.99":
+  version "2.9.99"
+  resolved "https://registry.yarnpkg.com/@harishjangra/rubix/-/rubix-2.9.99.tgz#bfbb3e4c78d2420be4523282acf24dc527bd7209"
+  integrity sha512-saO6sLixZ+DLaNcatHlqRIk9jASSPmxpDx+DYkzuXUVnNKb7DOKT0hhseC/Kr7fon6SSMAB3MB8/4lPVTjtM4Q==
+  dependencies:
+    "@harishjangra/redux-fetch-data" "^0.1.6"
+    axios "^0.19.2"
+    classnames "^2.2.6"
+    es6-promise "^4.2.8"
+    lodash-compat "^3.10.2"
+    prop-types "^15.7.2"
+    pubsub-js "^1.5.3"
+    query-string "^4.2.2"
+    react "^16.8.6"
+    react-bootstrap "^0.33.1"
+    react-dom "^16.8.6"
+    react-hot-loader "^3.0.0-beta.2"
+    react-motion "^0.4.4"
+    react-redux "^4.4.5"
+    react-router-dom "^5.1.2"
+    react-router-redux "^4.0.8"
+    react-router-scroll "^0.4.4"
+    redux "^3.5.2"
+    redux-thunk "^2.1.0"
+    request-frame "^1.4.1"
+    uncontrollable "^7.1.1"
+    watch "^0.19.1"
+
 "@types/prop-types@*":
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"

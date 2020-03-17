@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@harishjangra/redux-fetch-data": "^0.1.6",
+    "@harishjangra/rubix": "2.9.99",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "es6-promise": "^4.2.8",
