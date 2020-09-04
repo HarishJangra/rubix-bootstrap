@@ -94,7 +94,7 @@ class MainContainer extends React.Component {
   getInitialState() {
     return {
       open: true,
-      forceClose: false
+      forceClose: false,
     };
   }
   constructor(props) {
@@ -102,31 +102,31 @@ class MainContainer extends React.Component {
     this.state = this.getInitialState();
   }
 
-  isOpen(open) {
+  isOpen = (open) => {
     return this.state.open === open;
-  }
-  closeSidebar(forceClose = false) {
+  };
+  closeSidebar = (forceClose = false) => {
     this.setState({
       open: false,
-      forceClose: forceClose
+      forceClose: forceClose,
     });
     localStorage.setItem("sidebar-open-state", false);
-  }
-  openSidebar(forceClose = false) {
+  };
+  openSidebar = (forceClose = false) => {
     this.setState({
       open: true,
-      forceClose: forceClose
+      forceClose: forceClose,
     });
     localStorage.setItem("sidebar-open-state", true);
-  }
-  toggleSidebar() {
+  };
+  toggleSidebar = () => {
     if (this.state.forceClose) {
       this.openSidebar(false);
     } else {
       this.closeSidebar(true);
     }
-  }
-  sidebarStateChangeCallback(open) {
+  };
+  sidebarStateChangeCallback = (open) => {
     var openState = getOpenState();
     if (this.isOpen(open)) return;
     if (open !== undefined) {
@@ -135,16 +135,16 @@ class MainContainer extends React.Component {
       openState = !this.state.open;
     }
     this.setState({
-      open: openState // toggle sidebar
+      open: openState, // toggle sidebar
     });
     localStorage.setItem("sidebar-open-state", openState);
-  }
-  enablePath(props) {
+  };
+  enablePath = (props) => {
     if (props) {
-      enableStateForPathname(props.location.pathname, props.match.params);
+      enableStateForPathname(props.location.pathname, props.params);
     }
     Dispatcher.publish("sidebar:activate");
-  }
+  };
   componentWillReceiveProps(nextProps) {
     setTimeout(() => {
       this.enablePath(nextProps);
@@ -154,13 +154,13 @@ class MainContainer extends React.Component {
   componentWillUnmount() {
     Dispatcher.unsubscribe(this.handler);
   }
-  startSwipe(e) {
+  startSwipe = (e) => {
     if (e.changedTouches.length) {
       var touches = e.changedTouches[0];
       this.startX = touches.pageX;
     }
-  }
-  swiping(e) {
+  };
+  swiping = (e) => {
     if (e.changedTouches.length) {
       var touches = e.changedTouches[0];
       var change = Math.abs(touches.pageX - this.startX);
@@ -187,8 +187,8 @@ class MainContainer extends React.Component {
         }
       }
     }
-  }
-  cancelSwipe(e) {
+  };
+  cancelSwipe = (e) => {
     this.startX = 0;
     var body = document.getElementById("body");
     var sidebar = document.getElementById("sidebar");
@@ -199,10 +199,10 @@ class MainContainer extends React.Component {
     header.style.marginLeft = "";
     header.style.marginRight = "";
     this.setState({
-      open: false
+      open: false,
     });
-  }
-  endSwipe(e) {
+  };
+  endSwipe = (e) => {
     if (e.changedTouches.length) {
       var touches = e.changedTouches[0];
       var change = touches.pageX - this.startX;
@@ -221,22 +221,22 @@ class MainContainer extends React.Component {
 
         if (!this.state.open) {
           this.setState({
-            open: true
+            open: true,
           });
         } else {
           this.setState({
-            open: false
+            open: false,
           });
         }
       }
     }
-  }
-  componentWillUnmount() {
+  };
+  componentWillUnmount = () => {
     Dispatcher.unsubscribe(this.sidebarStateChangeCallback);
     Dispatcher.unsubscribe(this.closeSidebar);
     Dispatcher.unsubscribe(this.toggleSidebar);
-  }
-  componentDidMount() {
+  };
+  componentDidMount = () => {
     this.handler = Dispatcher.subscribe(
       "sidebar",
       this.sidebarStateChangeCallback
@@ -252,15 +252,15 @@ class MainContainer extends React.Component {
 
     var openState = getOpenState();
     this.setState({
-      open: openState
+      open: openState,
     });
 
     this.enablePath();
-  }
+  };
   render() {
     var classes = classNames({
       "container-open": this.state.open,
-      "force-close": this.state.forceClose
+      "force-close": this.state.forceClose,
     });
 
     return (
@@ -283,7 +283,7 @@ export class Sidebar extends React.Component {
 
     this.state = {
       left: props.sidebar * 100 + "%",
-      visibility: props.sidebar === 0 ? "visible" : "hidden"
+      visibility: props.sidebar === 0 ? "visible" : "hidden",
     };
 
     this.reinitializeScrollbarHandler = null;
@@ -327,7 +327,7 @@ export class Sidebar extends React.Component {
     if (isBrowser() && !isTouchDevice()) {
       if (window.Ps) {
         Ps.initialize(ReactDOM.findDOMNode(this.refs.sidebar), {
-          suppressScrollX: true
+          suppressScrollX: true,
         });
       }
     }
@@ -345,7 +345,7 @@ export class Sidebar extends React.Component {
     var newLeft = this.props.sidebar * 100 - sidebar * 100 + "%";
     this.setState({
       left: newLeft,
-      visibility: "visible"
+      visibility: "visible",
     });
   }
 
@@ -396,10 +396,10 @@ export class Sidebar extends React.Component {
         OTransition: "all 0.3s ease",
         MsTransition: "all 0.3s ease",
         MozTransition: "all 0.3s ease",
-        WebkitTransition: "all 0.3s ease"
+        WebkitTransition: "all 0.3s ease",
       },
       ...this.props,
-      className: classNames("sidebar", "sidebar__main", this.props.className)
+      className: classNames("sidebar", "sidebar__main", this.props.className),
     };
 
     delete props.sidebar;
@@ -449,17 +449,17 @@ export class SidebarNav extends React.Component {
 
     var props = {
       ...this.props,
-      className: classes
+      className: classes,
     };
 
-    var children = React.Children.map(this.props.children, el => {
+    var children = React.Children.map(this.props.children, (el) => {
       switch (el.type) {
         case SidebarNav:
         case SidebarNavItem:
           return React.cloneElement(el, {
             SidebarNavID: this.props.SidebarNavID || this.getID(),
             sidebarNavItem: this.props.sidebarNavItem,
-            rootSidebarNavItem: this.props.rootSidebarNavItem
+            rootSidebarNavItem: this.props.rootSidebarNavItem,
           });
         default:
           return React.cloneElement(el);
@@ -491,7 +491,7 @@ export class SidebarNavItem extends React.Component {
       toggleOpen: props.open || false,
       dir: "left",
       opposite: false,
-      height: 45
+      height: 45,
     };
 
     this.routes = [];
@@ -504,7 +504,7 @@ export class SidebarNavItem extends React.Component {
   handleLayoutDirChange(dir) {
     this.setState({
       dir: dir === "ltr" ? "left" : "right",
-      opposite: dir === "ltr" ? false : true
+      opposite: dir === "ltr" ? false : true,
     });
   }
 
@@ -528,7 +528,7 @@ export class SidebarNavItem extends React.Component {
         {
           height: totalHeight,
           open: true,
-          toggleOpen: true
+          toggleOpen: true,
         },
         () => {
           Dispatcher.publish("sidebar:update");
@@ -567,7 +567,7 @@ export class SidebarNavItem extends React.Component {
         {
           height: 45,
           open: false,
-          toggleOpen: false
+          toggleOpen: false,
         },
         () => {
           Dispatcher.publish("sidebar:update");
@@ -716,7 +716,7 @@ export class SidebarNavItem extends React.Component {
     this.closeSidebarNav();
   }
 
-  handleClick = e => {
+  handleClick = (e) => {
     if (!this.props.href) {
       e.preventDefault();
       e.stopPropagation();
@@ -742,7 +742,7 @@ export class SidebarNavItem extends React.Component {
     }
     if (found) {
       this.setState({
-        active: true
+        active: true,
       });
 
       this.checkAndClose(this.props);
@@ -756,7 +756,7 @@ export class SidebarNavItem extends React.Component {
       }
     } else {
       this.setState({
-        active: false
+        active: false,
       });
     }
   }
@@ -818,12 +818,12 @@ export class SidebarNavItem extends React.Component {
     var classes = classNames({
       open: this.state.open,
       active: this.state.active,
-      "sidebar-nav-item": true
+      "sidebar-nav-item": true,
     });
     var toggleClasses = classNames({
       "toggle-button": true,
       open: this.state.toggleOpen,
-      opposite: this.state.opposite
+      opposite: this.state.opposite,
     });
     var icon = null,
       toggleButton = null;
@@ -845,7 +845,7 @@ export class SidebarNavItem extends React.Component {
       name: null,
       style: style,
       tabIndex: "-1",
-      className: classes.trim()
+      className: classes.trim(),
     };
 
     var RouteLink = "a";
@@ -854,7 +854,7 @@ export class SidebarNavItem extends React.Component {
       tabIndex: -1,
       href: this.props.href || "",
       onClick: this.handleClick,
-      style: { height: 45 }
+      style: { height: 45 },
     };
 
     var pointerEvents = "all";
@@ -874,11 +874,11 @@ export class SidebarNavItem extends React.Component {
 
     var isRoot = this.props.sidebarNavItem ? false : true;
 
-    var children = React.Children.map(this.props.children, el => {
+    var children = React.Children.map(this.props.children, (el) => {
       return React.cloneElement(el, {
         sidebarNavItem: this,
         SidebarNavID: this.props.SidebarNavID,
-        rootSidebarNavItem: isRoot ? this : this.props.rootSidebarNavItem
+        rootSidebarNavItem: isRoot ? this : this.props.rootSidebarNavItem,
       });
     });
 
@@ -888,18 +888,18 @@ export class SidebarNavItem extends React.Component {
           height: spring(this.state.height, {
             stiffness: 300,
             damping: 20,
-            precision: 0.0001
-          })
+            precision: 0.0001,
+          }),
         }}
       >
-        {style => (
+        {(style) => (
           <li
-            ref={c => (this._node = c)}
+            ref={(c) => (this._node = c)}
             {...props}
             style={{
               display: this.props.hidden ? "none" : "block",
               pointerEvents: pointerEvents,
-              ...style
+              ...style,
             }}
           >
             <RouteLink {...componentProps}>
@@ -926,7 +926,7 @@ export class SidebarControls extends React.Component {
     var props = {
       dir: "ltr",
       ...this.props,
-      className: classes
+      className: classes,
     };
 
     return (
@@ -946,13 +946,13 @@ export class SidebarControlBtn extends React.Component {
     super(props);
 
     this.state = {
-      active: props.active || false
+      active: props.active || false,
     };
 
     this.controlbtnHandler = null;
   }
 
-  handleClick = e => {
+  handleClick = (e) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -987,7 +987,7 @@ export class SidebarControlBtn extends React.Component {
     var classes = classNames(
       "sidebar-control-btn",
       {
-        active: this.state.active
+        active: this.state.active,
       },
       this.props.className
     );
@@ -996,7 +996,7 @@ export class SidebarControlBtn extends React.Component {
       tabIndex: "-1",
       onClick: this.handleClick,
       ...this.props,
-      className: classes.trim()
+      className: classes.trim(),
     };
 
     delete props.glyph;
@@ -1037,21 +1037,21 @@ export class SidebarBtn extends React.Component {
     var classes = classNames(
       {
         "pull-left": true,
-        "visible-xs-inline-block": !this.props.visible
+        "visible-xs-inline-block": !this.props.visible,
       },
       this.props.className
     );
 
     var props = {
       ...this.props,
-      className: classes
+      className: classes,
     };
 
     delete props.visible;
 
     return (
       <Nav {...props} onSelect={this.handleSidebarStateChange}>
-        <NavItem data-id="sidebar-btn" className="sidebar-btn" href="/">
+        <NavItem data-id="sidebar-btn" className="sidebar-btn" href="#">
           <Icon bundle="fontello" glyph="th-list-5" />
         </NavItem>
       </Nav>
@@ -1063,11 +1063,11 @@ export class SidebarDivider extends React.Component {
   static belongsTo = "Sidebar";
 
   static propTypes = {
-    color: PropTypes.string
+    color: PropTypes.string,
   };
 
   static defaultProps = {
-    color: "#3B4648"
+    color: "#3B4648",
   };
 
   render() {
@@ -1078,7 +1078,7 @@ export class SidebarDivider extends React.Component {
           borderWidth: 2,
           marginTop: 15,
           marginBottom: 0,
-          width: 200
+          width: 200,
         }}
       />
     );
