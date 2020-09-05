@@ -371,6 +371,9 @@ var Sidebar = exports.Sidebar = (_temp2 = _class2 = function (_React$Component2)
 
     var _this4 = (0, _possibleConstructorReturn3.default)(this, (Sidebar.__proto__ || (0, _getPrototypeOf2.default)(Sidebar)).call(this, props));
 
+    _this4.sidebar = _react2.default.createRef();
+
+
     _this4.timer = null;
 
     _this4.state = {
@@ -389,7 +392,7 @@ var Sidebar = exports.Sidebar = (_temp2 = _class2 = function (_React$Component2)
   (0, _createClass3.default)(Sidebar, [{
     key: "repositionScrollbar",
     value: function repositionScrollbar(child_node, top, height) {
-      var node = _reactDom2.default.findDOMNode(this.refs.sidebar);
+      var node = _reactDom2.default.findDOMNode(this.sidebar.current);
       var scrollTo = top - node.getBoundingClientRect().top + node.scrollTop;
 
       while (child_node.parentNode) {
@@ -413,7 +416,7 @@ var Sidebar = exports.Sidebar = (_temp2 = _class2 = function (_React$Component2)
       if (!(0, _isTouchDevice2.default)()) {
         if ((0, _isBrowser2.default)()) {
           if (window.Ps) {
-            Ps.update(_reactDom2.default.findDOMNode(this.refs.sidebar));
+            Ps.update(_reactDom2.default.findDOMNode(this.sidebar.current));
           }
         }
       }
@@ -423,7 +426,7 @@ var Sidebar = exports.Sidebar = (_temp2 = _class2 = function (_React$Component2)
     value: function initializeScrollbar() {
       if ((0, _isBrowser2.default)() && !(0, _isTouchDevice2.default)()) {
         if (window.Ps) {
-          Ps.initialize(_reactDom2.default.findDOMNode(this.refs.sidebar), {
+          Ps.initialize(_reactDom2.default.findDOMNode(this.sidebar.current), {
             suppressScrollX: true
           });
         }
@@ -434,7 +437,7 @@ var Sidebar = exports.Sidebar = (_temp2 = _class2 = function (_React$Component2)
     value: function destroyScrollbar() {
       if ((0, _isBrowser2.default)() && !(0, _isTouchDevice2.default)()) {
         if (window.Ps) {
-          Ps.destroy(_reactDom2.default.findDOMNode(this.refs.sidebar));
+          Ps.destroy(_reactDom2.default.findDOMNode(this.sidebar.current));
         }
       }
     }
@@ -488,20 +491,20 @@ var Sidebar = exports.Sidebar = (_temp2 = _class2 = function (_React$Component2)
       }, this.props, {
         className: (0, _classnames2.default)("sidebar", "sidebar__main", this.props.className)
       });
-
+      console.log("this.props", props);
       delete props.sidebar;
 
       return _react2.default.createElement(
         "div",
         (0, _extends3.default)({
-          ref: "sidebar"
+          ref: this.sidebar
         }, props, {
           children: null,
           "data-id": this.props.sidebar
         }),
         _react2.default.createElement(
           "div",
-          { ref: "innersidebar" },
+          null,
           this.props.children
         )
       );
@@ -517,6 +520,9 @@ var SidebarNav = exports.SidebarNav = (_temp3 = _class3 = function (_React$Compo
 
     var _this5 = (0, _possibleConstructorReturn3.default)(this, (SidebarNav.__proto__ || (0, _getPrototypeOf2.default)(SidebarNav)).call(this, props));
 
+    _this5.ul = _react2.default.createRef();
+
+
     _this5.id = ++SidebarNav.id;
     return _this5;
   }
@@ -529,7 +535,7 @@ var SidebarNav = exports.SidebarNav = (_temp3 = _class3 = function (_React$Compo
   }, {
     key: "getHeight",
     value: function getHeight() {
-      return _reactDom2.default.findDOMNode(this.refs.ul).getClientRects()[0].height;
+      return _reactDom2.default.findDOMNode(this.ul.current).getClientRects()[0].height;
     }
   }, {
     key: "search",
@@ -571,7 +577,7 @@ var SidebarNav = exports.SidebarNav = (_temp3 = _class3 = function (_React$Compo
 
       return _react2.default.createElement(
         "ul",
-        (0, _extends3.default)({ ref: "ul" }, props),
+        (0, _extends3.default)({ ref: this.ul }, props),
         children
       );
     }

@@ -275,6 +275,7 @@ export default MainContainer;
 
 export class Sidebar extends React.Component {
   static belongsTo = "Sidebar";
+  sidebar = React.createRef();
 
   constructor(props) {
     super(props);
@@ -294,7 +295,7 @@ export class Sidebar extends React.Component {
   }
 
   repositionScrollbar(child_node, top, height) {
-    var node = ReactDOM.findDOMNode(this.refs.sidebar);
+    var node = ReactDOM.findDOMNode(this.sidebar.current);
     var scrollTo = top - node.getBoundingClientRect().top + node.scrollTop;
 
     while (child_node.parentNode) {
@@ -317,7 +318,7 @@ export class Sidebar extends React.Component {
     if (!isTouchDevice()) {
       if (isBrowser()) {
         if (window.Ps) {
-          Ps.update(ReactDOM.findDOMNode(this.refs.sidebar));
+          Ps.update(ReactDOM.findDOMNode(this.sidebar.current));
         }
       }
     }
@@ -326,7 +327,7 @@ export class Sidebar extends React.Component {
   initializeScrollbar() {
     if (isBrowser() && !isTouchDevice()) {
       if (window.Ps) {
-        Ps.initialize(ReactDOM.findDOMNode(this.refs.sidebar), {
+        Ps.initialize(ReactDOM.findDOMNode(this.sidebar.current), {
           suppressScrollX: true,
         });
       }
@@ -336,7 +337,7 @@ export class Sidebar extends React.Component {
   destroyScrollbar() {
     if (isBrowser() && !isTouchDevice()) {
       if (window.Ps) {
-        Ps.destroy(ReactDOM.findDOMNode(this.refs.sidebar));
+        Ps.destroy(ReactDOM.findDOMNode(this.sidebar.current));
       }
     }
   }
@@ -401,17 +402,17 @@ export class Sidebar extends React.Component {
       ...this.props,
       className: classNames("sidebar", "sidebar__main", this.props.className),
     };
-
+    console.log("this.props", props);
     delete props.sidebar;
 
     return (
       <div
-        ref="sidebar"
+        ref={this.sidebar}
         {...props}
         children={null}
         data-id={this.props.sidebar}
       >
-        <div ref="innersidebar">{this.props.children}</div>
+        <div>{this.props.children}</div>
       </div>
     );
   }
@@ -433,12 +434,14 @@ export class SidebarNav extends React.Component {
   }
 
   getHeight() {
-    return ReactDOM.findDOMNode(this.refs.ul).getClientRects()[0].height;
+    return ReactDOM.findDOMNode(this.ul.current).getClientRects()[0].height;
   }
 
   search(text) {
     Dispatcher.publish("sidebar:search", text, this.getID());
   }
+
+  ul = React.createRef();
 
   render() {
     var classes = classNames("sidebar-nav", this.props.className);
@@ -471,7 +474,7 @@ export class SidebarNav extends React.Component {
     delete props.rootSidebarNavItem;
 
     return (
-      <ul ref="ul" {...props}>
+      <ul ref={this.ul} {...props}>
         {children}
       </ul>
     );
