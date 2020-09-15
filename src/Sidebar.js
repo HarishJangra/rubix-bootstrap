@@ -1040,7 +1040,7 @@ export class SidebarBtn extends React.Component {
     var classes = classNames(
       {
         "pull-left": true,
-        "visible-xs-inline-block": !this.props.visible,
+        // "visible-xs-inline-block": !this.props.visible,
       },
       this.props.className
     );

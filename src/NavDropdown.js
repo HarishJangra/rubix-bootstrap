@@ -109,7 +109,7 @@ export var NavDropdownHoverHOC = ComposedComponent => class extends React.Compon
 
   _isWithinDropdown(node) {
     var componentNode = ReactDOM.findDOMNode(this._node);
-    return componentNode.contains(node) || componentNode === node;
+    return (componentNode && componentNode.contains(node)) || componentNode === node;
   }
 
   _handleOver(e) {

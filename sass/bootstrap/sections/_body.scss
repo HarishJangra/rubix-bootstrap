@@ -21,11 +21,11 @@
     padding-top: $line-height-computed;
   }
 
-  #sidebar ~ #body {
-    @media (min-width: $screen-sm-min) {
-      margin-left: get($list, sidebar, width);
-    }
-  }
+  // #sidebar ~ #body {
+  //   @media (min-width: $screen-sm-min) {
+  //     margin-left: get($list, sidebar, width);
+  //   }
+  // }
 
   #sidebar + #body {
     margin-top: 0;

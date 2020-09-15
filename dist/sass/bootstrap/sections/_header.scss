@@ -108,7 +108,7 @@
 
       &.sidebar-btn > a {
         color: get($list, header, sidebar-btn, color);
-        background: get($list, header, sidebar-btn, bg);
+        // background: get($list, header, sidebar-btn, bg);
 
         &:hover {
           background: get($list, header, sidebar-btn, hover-bg);
@@ -138,11 +138,11 @@
     }
   }
 
-  @media (min-width: $screen-sm-min) {
-    #rubix-nav-header {
-      margin-left: get($list, sidebar, width);
-    }
-  }
+  // @media (min-width: $screen-sm-min) {
+  //   #rubix-nav-header {
+  //     margin-left: get($list, sidebar, width);
+  //   }
+  // }
 
   #flag-menu-btn {
     >img {

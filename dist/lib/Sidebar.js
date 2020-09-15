@@ -1161,8 +1161,8 @@ var SidebarBtn = exports.SidebarBtn = (_temp8 = _class8 = function (_React$Compo
     key: "render",
     value: function render() {
       var classes = (0, _classnames2.default)({
-        "pull-left": true,
-        "visible-xs-inline-block": !this.props.visible
+        "pull-left": true
+        // "visible-xs-inline-block": !this.props.visible,
       }, this.props.className);
 
       var props = (0, _extends3.default)({}, this.props, {
