@@ -491,7 +491,7 @@ var Sidebar = exports.Sidebar = (_temp2 = _class2 = function (_React$Component2)
       }, this.props, {
         className: (0, _classnames2.default)("sidebar", "sidebar__main", this.props.className)
       });
-      console.log("this.props", props);
+      // console.log("this.props", props);
       delete props.sidebar;
 
       return _react2.default.createElement(

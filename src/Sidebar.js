@@ -402,7 +402,7 @@ export class Sidebar extends React.Component {
       ...this.props,
       className: classNames("sidebar", "sidebar__main", this.props.className),
     };
-    console.log("this.props", props);
+    // console.log("this.props", props);
     delete props.sidebar;
 
     return (
