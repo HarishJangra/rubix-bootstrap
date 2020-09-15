@@ -126,7 +126,7 @@ export default class PanelContainer extends React.Component {
     let props = { ...this.props };
     let controls = this.renderControls();
 
-    if (props.controls === false) {
+    if (!props.controls) {
       controls = null;
     } else if (props.controls !== undefined) {
       controls = (

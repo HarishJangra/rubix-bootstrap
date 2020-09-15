@@ -193,7 +193,7 @@ var PanelContainer = (_temp = _class = function (_React$Component) {
       var props = (0, _extends3.default)({}, this.props);
       var controls = this.renderControls();
 
-      if (props.controls === false) {
+      if (!props.controls) {
         controls = null;
       } else if (props.controls !== undefined) {
         controls = _react2.default.createElement(
