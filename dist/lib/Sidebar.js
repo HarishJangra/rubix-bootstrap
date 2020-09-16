@@ -149,7 +149,8 @@ function matchRoutes(routes, pathname, params) {
 }
 
 function getOpenState() {
-  return !(0, _isTouchDevice2.default)() ? localStorage.getItem("sidebar-open-state") === "true" ? true : false : false;
+  var openstate = localStorage.getItem("sidebar-open-state");
+  return !(0, _isTouchDevice2.default)() ? openstate ? openstate === "true" ? true : false : true : false;
 }
 
 var MainContainer = (_temp = _class = function (_React$Component) {

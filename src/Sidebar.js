@@ -83,11 +83,12 @@ function matchRoutes(routes, pathname, params) {
 }
 
 function getOpenState() {
+  let openstate = localStorage.getItem("sidebar-open-state")  
   return !isTouchDevice()
-    ? localStorage.getItem("sidebar-open-state") === "true"
+  ? openstate ? openstate === "true"
       ? true
       : false
-    : false;
+    : true : false
 }
 
 class MainContainer extends React.Component {
