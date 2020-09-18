@@ -21,7 +21,7 @@ export default class Form extends React.Component {
     if (!props.allowAutoComplete) {
       return (
         <BForm {...props} autoComplete="off">
-          <div style={{ height: 0, visibility: "hidden" }}>
+          {/* <div style={{ height: 0, visibility: "hidden" }}>
             <FormGroup>
               <FormControl name="__test__" type="text" />
             </FormGroup>
@@ -31,7 +31,7 @@ export default class Form extends React.Component {
             <FormGroup>
               <FormControl type="__password__" />
             </FormGroup>
-          </div>
+          </div> */}
           {this.props.children}
         </BForm>
       );
