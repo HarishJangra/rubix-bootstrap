@@ -72,25 +72,6 @@ var Form = (_temp = _class = function (_React$Component) {
         return _react2.default.createElement(
           _Form2.default,
           (0, _extends3.default)({}, props, { autoComplete: "off" }),
-          _react2.default.createElement(
-            "div",
-            { style: { height: 0, visibility: "hidden" } },
-            _react2.default.createElement(
-              _FormGroup2.default,
-              null,
-              _react2.default.createElement(_FormControl2.default, { name: "__test__", type: "text" })
-            ),
-            _react2.default.createElement(
-              _FormGroup2.default,
-              null,
-              _react2.default.createElement(_FormControl2.default, { name: "__testemail__", type: "email" })
-            ),
-            _react2.default.createElement(
-              _FormGroup2.default,
-              null,
-              _react2.default.createElement(_FormControl2.default, { type: "__password__" })
-            )
-          ),
           this.props.children
         );
       }
