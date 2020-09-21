@@ -27,7 +27,7 @@ export default ({
     let secondEllp = items > activePage + 2 && activePage < items;
     let arr = getArary(items, activePage);
   
-    return (
+    return  (
       <Pagination {...rest}>
         {prev && <Pagination.Prev disabled={activePage === 1} onClick={onPrev} />}
         <Pagination.Item
@@ -55,7 +55,9 @@ export default ({
         })}
         {secondEllp && <Pagination.Ellipsis />}
   
-        <Pagination.Item
+        {
+          items === 1 ? null :
+          <Pagination.Item
           onClick={() => {
             onSelect(items);
           }}
@@ -63,6 +65,8 @@ export default ({
         >
           {items}
         </Pagination.Item>
+
+        }
         {next && (
           <Pagination.Next disabled={activePage === items} onClick={onNext} />
         )}

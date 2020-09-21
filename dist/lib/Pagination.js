@@ -72,7 +72,7 @@ exports.default = function (_ref) {
       );
     }),
     secondEllp && _react2.default.createElement(_Pagination2.default.Ellipsis, null),
-    _react2.default.createElement(
+    items === 1 ? null : _react2.default.createElement(
       _Pagination2.default.Item,
       {
         onClick: function onClick() {
