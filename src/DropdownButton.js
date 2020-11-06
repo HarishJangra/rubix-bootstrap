@@ -145,7 +145,7 @@ export var DropdownHoverButtonHOC = ComposedComponent => class extends React.Com
 
   _isWithinDropdown(node) {
     var componentNode = ReactDOM.findDOMNode(this._node);
-    return componentNode.contains(node) || componentNode === node;
+    return componentNode && (componentNode.contains(node) || componentNode === node);
   }
 
   _handleOver(e) {

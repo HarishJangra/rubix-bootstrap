@@ -219,7 +219,7 @@ var DropdownHoverButtonHOC = exports.DropdownHoverButtonHOC = function DropdownH
       key: '_isWithinDropdown',
       value: function _isWithinDropdown(node) {
         var componentNode = _reactDom2.default.findDOMNode(this._node);
-        return componentNode.contains(node) || componentNode === node;
+        return componentNode && (componentNode.contains(node) || componentNode === node);
       }
     }, {
       key: '_handleOver',
